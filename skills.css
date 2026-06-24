@@ -1,0 +1,549 @@
+/* SKILLS SECTION */
+.skills-section {
+    margin-top: 100px;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 60px;
+    margin-bottom: 80px;
+
+}
+
+.skills-section h2 {
+    color: #9B8DFF;
+    font-family: 'Outfit', 'Segoe UI', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+/* Legend letter gradients */
+.proficient {
+    background: linear-gradient(180deg,
+            #B8860B 0%, #FFD700 20%, #FFF8DC 40%, #FFD700 60%, #B8860B 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.intermediate {
+    background: linear-gradient(180deg,
+            rgba(143, 143, 143, 0.5) 0%, rgba(230, 230, 230, 0.5) 25%, rgba(255, 255, 255, 0.5) 50%, rgba(230, 230, 230, 0.5) 75%, rgba(143, 143, 143, 0.5) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.beginner {
+    background: linear-gradient(180deg,
+            #5C3A21 0%, #CD7F32 30%, #F4A460 50%, #CD7F32 70%, #5C3A21 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+/* Legend bar */
+.skills-legend {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    color: #cccccc;
+    font-size: 14px;
+}
+
+.skills-legend strong {
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+/* Slider container */
+.skills-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+.slider-arrow {
+    background-color: #1E1E1E;
+    border: 1px solid rgba(155, 141, 255, 0.3);
+    color: #9B8DFF;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.slider-arrow:hover {
+    background-color: #9B8DFF;
+    color: #0A0A0A;
+    border-color: #9B8DFF;
+}
+
+.skills-slider-wrapper {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+#skillsSlider {
+    display: flex;
+    flex-direction: row;
+    transition: transform 0.4s ease-in-out;
+}
+
+.skill-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    background-color: #1E1E1E;
+    padding: 48px;
+    /* taller slide */
+    border-radius: 32px;
+    box-sizing: border-box;
+    color: #E0E0E0;
+}
+
+.skill-slide h3,
+.skill-slide h4 {
+    color: #9B8DFF;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+    /* space below heading */
+}
+
+/* ===== LANGUAGE PILLS (same as tech) ===== */
+.language-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.language-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 24px 28px;
+    border-radius: 20px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    min-width: 120px;
+    min-height: 120px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.language-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.lang-name {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+/* Hover shine */
+.language-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    transition: left 0.5s;
+}
+
+.language-item:hover::before {
+    left: 100%;
+}
+
+/* Proficient (Gold) */
+.language-item.proficient {
+    background-color: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.language-item.proficient::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+}
+
+.language-item.proficient .lang-name {
+    background: linear-gradient(180deg, #B8860B 0%, #FFD700 20%, #FFF8DC 40%, #FFD700 60%, #B8860B 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.language-item.proficient:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 215, 0, 0.6);
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
+}
+
+/* Intermediate (Silver) */
+.language-item.intermediate {
+    background-color: rgba(200, 200, 200, 0.1);
+    border-color: rgba(200, 200, 200, 0.3);
+}
+
+.language-item.intermediate::before {
+    background: linear-gradient(90deg, transparent, rgba(200, 200, 200, 0.3), transparent);
+}
+
+.language-item.intermediate .lang-name {
+    background: linear-gradient(180deg, rgba(143, 143, 143, 0.8) 0%, rgba(230, 230, 230, 0.8) 25%, rgba(255, 255, 255, 0.8) 50%, rgba(230, 230, 230, 0.8) 75%, rgba(143, 143, 143, 0.8) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.language-item.intermediate:hover {
+    transform: translateY(-4px);
+    border-color: rgba(200, 200, 200, 0.6);
+    box-shadow: 0 4px 20px rgba(200, 200, 200, 0.2);
+}
+
+/* Beginner (Bronze) – if needed */
+.language-item.beginner {
+    background-color: rgba(205, 127, 50, 0.1);
+    border-color: rgba(205, 127, 50, 0.3);
+}
+
+.language-item.beginner::before {
+    background: linear-gradient(90deg, transparent, rgba(205, 127, 50, 0.3), transparent);
+}
+
+.language-item.beginner .lang-name {
+    background: linear-gradient(180deg, #5C3A21 0%, #CD7F32 30%, #F4A460 50%, #CD7F32 70%, #5C3A21 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.language-item.beginner:hover {
+    transform: translateY(-4px);
+    border-color: rgba(205, 127, 50, 0.6);
+    box-shadow: 0 4px 20px rgba(205, 127, 50, 0.2);
+}
+
+/* ===== TECH ITEMS ===== */
+.tech-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.tech {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 24px 28px;
+    border-radius: 20px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    min-width: 120px;
+    min-height: 120px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.tech-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.tech span {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+/* Shine for tech */
+.tech::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    transition: left 0.5s;
+}
+
+.tech:hover::before {
+    left: 100%;
+}
+
+/* Proficient */
+.tech.proficient {
+    background-color: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.tech.proficient::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+}
+
+.tech.proficient span {
+    background: linear-gradient(180deg, #B8860B 0%, #FFD700 20%, #FFF8DC 40%, #FFD700 60%, #B8860B 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.tech.proficient:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 215, 0, 0.6);
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
+}
+
+/* Intermediate */
+.tech.intermediate {
+    background-color: rgba(200, 200, 200, 0.1);
+    border-color: rgba(200, 200, 200, 0.3);
+}
+
+.tech.intermediate::before {
+    background: linear-gradient(90deg, transparent, rgba(200, 200, 200, 0.3), transparent);
+}
+
+.tech.intermediate span {
+    background: linear-gradient(180deg, rgba(143, 143, 143, 0.8) 0%, rgba(230, 230, 230, 0.8) 25%, rgba(255, 255, 255, 0.8) 50%, rgba(230, 230, 230, 0.8) 75%, rgba(143, 143, 143, 0.8) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.tech.intermediate:hover {
+    transform: translateY(-4px);
+    border-color: rgba(200, 200, 200, 0.6);
+    box-shadow: 0 4px 20px rgba(200, 200, 200, 0.2);
+}
+
+/* Beginner */
+.tech.beginner {
+    background-color: rgba(205, 127, 50, 0.1);
+    border-color: rgba(205, 127, 50, 0.3);
+}
+
+.tech.beginner::before {
+    background: linear-gradient(90deg, transparent, rgba(205, 127, 50, 0.3), transparent);
+}
+
+.tech.beginner span {
+    background: linear-gradient(180deg, #5C3A21 0%, #CD7F32 30%, #F4A460 50%, #CD7F32 70%, #5C3A21 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.tech.beginner:hover {
+    transform: translateY(-4px);
+    border-color: rgba(205, 127, 50, 0.6);
+    box-shadow: 0 4px 20px rgba(205, 127, 50, 0.2);
+}
+
+/* ===== CERTIFICATES GRID & SHOW MORE ===== */
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.cert-item {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(155, 141, 255, 0.2);
+    border-radius: 20px;
+    padding: 24px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.cert-item:hover {
+    border-color: #9B8DFF;
+    box-shadow: 0 4px 20px rgba(155, 141, 255, 0.15);
+    transform: translateY(-4px);
+}
+
+.cert-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 16px;
+}
+
+.cert-name {
+    color: #FFFFFF;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.cert-link {
+    color: #9B8DFF;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid rgba(155, 141, 255, 0.3);
+    padding: 6px 20px;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.cert-link:hover {
+    background-color: #9B8DFF;
+    color: #0A0A0A;
+}
+
+/* Hidden certificate group */
+.hidden-certs {
+    display: none;
+}
+
+/* When expanded, children flow normally */
+.certificates-grid.expanded .hidden-certs {
+    display: contents;
+}
+
+/* Show More button */
+.show-more-btn {
+    display: block;
+    margin: 28px auto 0;
+    background: transparent;
+    color: #9B8DFF;
+    border: 1px solid rgba(155, 141, 255, 0.4);
+    padding: 10px 32px;
+    border-radius: 24px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.show-more-btn:hover {
+    background: #9B8DFF;
+    color: #0A0A0A;
+    border-color: #9B8DFF;
+}
+
+/* Slider dots */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #555;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dot.active {
+    background-color: #9B8DFF;
+    width: 28px;
+    border-radius: 10px;
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .skills-section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .slider-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .skill-slide {
+        padding: 32px;
+    }
+
+    .tech,
+    .language-item {
+        min-width: 90px;
+        min-height: 90px;
+        padding: 16px 20px;
+    }
+
+    .tech-icon,
+    .language-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .tech span,
+    .lang-name {
+        font-size: 16px;
+    }
+
+    .certificates-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .certificates-grid {
+        grid-template-columns: 1fr;
+    }
+}

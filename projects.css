@@ -1,0 +1,138 @@
+/* =============================================
+   PROJECTS SECTION
+   ============================================= */
+.projects-section {
+    margin-top: 100px;
+    padding: 0 60px;
+    padding-bottom: 80px;
+    position: relative;
+    background-color: #0A0A0A;
+}
+
+.projects-section h2 {
+    color: #9B8DFF;
+    font-family: 'Outfit', 'Segoe UI', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+/* Simple card grid - NO sticky stacking */
+.projects-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    max-width: 1650px;
+    margin: 0 auto;
+}
+
+.project-card {
+    width: 100%;
+    background: #1E1E1E;
+    border-radius: 70px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.card-inner {
+    display: flex;
+    height: 100%;
+    min-height: 400px;
+}
+
+.card-left {
+    flex: 1;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-title {
+    color: #FFD700;
+    font-size: 28px;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+}
+
+.project-desc {
+    color: #B0B0B0;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 30px 0;
+    max-width: 600px;
+}
+
+.Live-project {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #FFFFFF;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 16px;
+    align-self: flex-start;
+    transition: color 0.3s;
+}
+
+.Live-project:hover {
+    color: #FFD700;
+}
+
+.arrow-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s;
+}
+
+.Live-project:hover .arrow-icon {
+    transform: translateX(5px);
+}
+
+.card-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card-right img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 20px;
+}
+
+@media (max-width: 1024px) {
+    .card-inner {
+        flex-direction: column;
+    }
+
+    .card-right {
+        order: -1;
+        padding: 20px 20px 0 20px;
+    }
+
+    .card-left {
+        padding: 30px;
+    }
+
+    .project-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-section {
+        padding: 0 20px;
+        padding-bottom: 60px;
+    }
+
+    .projects-stack {
+        gap: 30px;
+    }
+}
