@@ -1,14 +1,9 @@
 const nodemailer = require('nodemailer');
 
 module.exports = async (req, res) => {
-    // Enable CORS
-    res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-    );
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
@@ -37,7 +32,6 @@ module.exports = async (req, res) => {
         }
 
         if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-            console.error('Missing env vars');
             return res.status(500).json({
                 success: false,
                 error: 'Email service not configured'
@@ -70,8 +64,7 @@ module.exports = async (req, res) => {
             replyTo: email
         };
 
-        const info = await transporter.sendMail(mailOptions);
-        console.log('Email sent:', info.messageId);
+        await transporter.sendMail(mailOptions);
 
         return res.status(200).json({
             success: true,
