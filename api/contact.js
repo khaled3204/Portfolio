@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    // Enable CORS for local development
+    // Enable CORS
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -65,7 +65,6 @@ module.exports = async (req, res) => {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS
             },
-            // Add timeout and connection settings
             connectionTimeout: 10000,
             greetingTimeout: 10000,
             socketTimeout: 10000
@@ -144,7 +143,6 @@ module.exports = async (req, res) => {
     } catch (error) {
         console.error('Error sending email:', error);
 
-        // Provide more specific error messages
         let errorMessage = 'Failed to send email';
         if (error.code === 'EAUTH') {
             errorMessage = 'Email authentication failed. Please check your credentials.';

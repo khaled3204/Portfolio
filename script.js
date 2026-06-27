@@ -120,11 +120,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 const result = await response.json();
 
                 if (response.ok && result.success) {
-                    // Success - show nice message
                     alert('✅ Message sent successfully! I\'ll get back to you soon.');
                     contactForm.reset();
                 } else {
-                    // Handle different error cases
                     let errorMessage = '❌ Failed to send message. ';
                     if (result.error) {
                         errorMessage += result.error;
@@ -135,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.error('Server error:', result);
                 }
             } catch (error) {
-                // Network or other errors
                 let errorMessage = '❌ Network error. ';
                 if (error.message) {
                     errorMessage += error.message;
@@ -162,7 +159,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const contactLink = document.getElementById('modalContactLink');
     const discordLink = document.getElementById('discordLiveLink');
 
-    // If the modal doesn't exist, log a warning and stop
     if (!modal) {
         console.warn('Modal element #accessModal not found.');
         return;
@@ -179,26 +175,22 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.style.overflow = '';
     }
 
-    // Attach click event to Discord link
     if (discordLink) {
         discordLink.addEventListener('click', openModal);
     } else {
         console.warn('Discord link #discordLiveLink not found.');
     }
 
-    // Close button
     if (closeBtn) {
         closeBtn.addEventListener('click', closeModal);
     }
 
-    // Click overlay to close
     modal.addEventListener('click', function (e) {
         if (e.target === modal) {
             closeModal();
         }
     });
 
-    // "contact me" link – closes modal and scrolls to contact section
     if (contactLink) {
         contactLink.addEventListener('click', function (e) {
             e.preventDefault();
@@ -210,7 +202,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Close on Escape key
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
             closeModal();
@@ -219,14 +210,14 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 
 // =============================================
-// 4. ADDITIONAL: Form validation helper
+// 4. Form Validation Helper
 // =============================================
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 
-// Add real-time validation to the contact form
+// Add real-time validation
 document.addEventListener('DOMContentLoaded', function () {
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
@@ -242,7 +233,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             let isValid = true;
 
-            // Validate name
             if (name.length < 2) {
                 isValid = false;
                 if (nameInput) nameInput.style.borderColor = '#ff4444';
@@ -250,7 +240,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (nameInput) nameInput.style.borderColor = '#4CAF50';
             }
 
-            // Validate email
             if (!validateEmail(email)) {
                 isValid = false;
                 if (emailInput) emailInput.style.borderColor = '#ff4444';
@@ -258,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (emailInput) emailInput.style.borderColor = '#4CAF50';
             }
 
-            // Validate message
             if (message.length < 10) {
                 isValid = false;
                 if (messageInput) messageInput.style.borderColor = '#ff4444';
@@ -275,41 +263,14 @@ document.addEventListener('DOMContentLoaded', function () {
             return isValid;
         }
 
-        // Add input event listeners for real-time validation
         if (nameInput) nameInput.addEventListener('input', validateForm);
         if (emailInput) emailInput.addEventListener('input', validateForm);
         if (messageInput) messageInput.addEventListener('input', validateForm);
 
-        // Initial validation
         validateForm();
     }
 });
 
-// =============================================
-// 5. ADDITIONAL: Smooth scroll for all anchor links
-// =============================================
-document.addEventListener('DOMContentLoaded', function () {
-    // Add smooth scroll to all anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href !== '#') {
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
-        });
-    });
-});
-
-// =============================================
-// 6. ADDITIONAL: Console warning for missing API
-// =============================================
 console.log('🚀 Portfolio website loaded successfully!');
 console.log('💡 Contact form will send messages to /api/contact');
 console.log('📧 Make sure you have set up EMAIL_USER and EMAIL_PASS in Vercel environment variables');

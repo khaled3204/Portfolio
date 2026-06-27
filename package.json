@@ -6,12 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/khaled3204/Portfolio.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Khaled Al Chalati",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
