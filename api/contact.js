@@ -67,16 +67,7 @@ module.exports = async (req, res) => {
                 <hr>
                 <p>Reply to: <a href="mailto:${email}">${email}</a></p>
             `,
-            replyTo: email,
-            text: `
-                New Contact Form Submission
-                
-                Name: ${name}
-                Email: ${email}
-                Message: ${message}
-                
-                Reply to: ${email}
-            `
+            replyTo: email
         };
 
         const info = await transporter.sendMail(mailOptions);
