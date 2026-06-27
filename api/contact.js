@@ -1,8 +1,6 @@
 const nodemailer = require('nodemailer');
 
 module.exports = async (req, res) => {
-    console.log('=== CONTACT API CALLED ===');
-
     // Enable CORS
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
