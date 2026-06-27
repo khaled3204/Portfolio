@@ -84,13 +84,71 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Contact form handler
+    // =============================================
+    // 3. CONTACT FORM - Send to Vercel API
+    // =============================================
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
+        contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            contactForm.reset();
+
+            // Get form data
+            const formData = new FormData(contactForm);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message')
+            };
+
+            // Get the submit button for loading state
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+
+            // Show loading state
+            submitBtn.innerHTML = '<span>Sending...</span>';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    // Success - show nice message
+                    alert('✅ Message sent successfully! I\'ll get back to you soon.');
+                    contactForm.reset();
+                } else {
+                    // Handle different error cases
+                    let errorMessage = '❌ Failed to send message. ';
+                    if (result.error) {
+                        errorMessage += result.error;
+                    } else {
+                        errorMessage += 'Please try again later.';
+                    }
+                    alert(errorMessage);
+                    console.error('Server error:', result);
+                }
+            } catch (error) {
+                // Network or other errors
+                let errorMessage = '❌ Network error. ';
+                if (error.message) {
+                    errorMessage += error.message;
+                } else {
+                    errorMessage += 'Please check your connection and try again.';
+                }
+                alert(errorMessage);
+                console.error('Network error:', error);
+            } finally {
+                // Restore button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
         });
     }
 });
@@ -159,3 +217,99 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 })();
+
+// =============================================
+// 4. ADDITIONAL: Form validation helper
+// =============================================
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// Add real-time validation to the contact form
+document.addEventListener('DOMContentLoaded', function () {
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        const emailInput = document.getElementById('email');
+        const nameInput = document.getElementById('name');
+        const messageInput = document.getElementById('message');
+        const submitBtn = contactForm.querySelector('.submit-btn');
+
+        function validateForm() {
+            const name = nameInput ? nameInput.value.trim() : '';
+            const email = emailInput ? emailInput.value.trim() : '';
+            const message = messageInput ? messageInput.value.trim() : '';
+
+            let isValid = true;
+
+            // Validate name
+            if (name.length < 2) {
+                isValid = false;
+                if (nameInput) nameInput.style.borderColor = '#ff4444';
+            } else {
+                if (nameInput) nameInput.style.borderColor = '#4CAF50';
+            }
+
+            // Validate email
+            if (!validateEmail(email)) {
+                isValid = false;
+                if (emailInput) emailInput.style.borderColor = '#ff4444';
+            } else {
+                if (emailInput) emailInput.style.borderColor = '#4CAF50';
+            }
+
+            // Validate message
+            if (message.length < 10) {
+                isValid = false;
+                if (messageInput) messageInput.style.borderColor = '#ff4444';
+            } else {
+                if (messageInput) messageInput.style.borderColor = '#4CAF50';
+            }
+
+            if (submitBtn) {
+                submitBtn.disabled = !isValid;
+                submitBtn.style.opacity = isValid ? '1' : '0.5';
+                submitBtn.style.cursor = isValid ? 'pointer' : 'not-allowed';
+            }
+
+            return isValid;
+        }
+
+        // Add input event listeners for real-time validation
+        if (nameInput) nameInput.addEventListener('input', validateForm);
+        if (emailInput) emailInput.addEventListener('input', validateForm);
+        if (messageInput) messageInput.addEventListener('input', validateForm);
+
+        // Initial validation
+        validateForm();
+    }
+});
+
+// =============================================
+// 5. ADDITIONAL: Smooth scroll for all anchor links
+// =============================================
+document.addEventListener('DOMContentLoaded', function () {
+    // Add smooth scroll to all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+});
+
+// =============================================
+// 6. ADDITIONAL: Console warning for missing API
+// =============================================
+console.log('🚀 Portfolio website loaded successfully!');
+console.log('💡 Contact form will send messages to /api/contact');
+console.log('📧 Make sure you have set up EMAIL_USER and EMAIL_PASS in Vercel environment variables');
