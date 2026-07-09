@@ -258,6 +258,22 @@ body {
     margin-bottom: 0;
 }
 
+/* ===== LOADER VISIBILITY ===== */
+.loader-hidden {
+    display: none;
+}
+
+.loader-visible {
+    display: inline-block;
+    /* or inline, whichever fits your layout */
+}
+
+/* ===== CONTACT FORM FEEDBACK ===== */
+.form-feedback {
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
 /* Responsive */
 @media (max-width: 1000px) {
     .about-container {
