@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // =============================================
     // 2. NAVIGATION - Smooth scroll to sections
+    //    (FIX: only intercept hash links, not external/PDF links)
     // =============================================
     const navLinks = document.querySelectorAll('.nav-links a');
     const contactIcon = document.querySelector('.contact-icon');
@@ -65,13 +66,15 @@ document.addEventListener('DOMContentLoaded', function () {
     navLinks.forEach(link => {
         link.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            if (href && href !== '#') {
+            // Only handle internal links that start with '#'
+            if (href && href.startsWith('#')) {
                 e.preventDefault();
                 const targetElement = document.querySelector(href);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
                 }
             }
+            // For any other link (like the Resume PDF), do nothing – let the default behavior happen
         });
     });
 
