@@ -31,8 +31,7 @@
 }
 
 .intermediate {
-    background: linear-gradient(180deg,
-            rgba(143, 143, 143, 0.5) 0%, rgba(230, 230, 230, 0.5) 25%, rgba(255, 255, 255, 0.5) 50%, rgba(230, 230, 230, 0.5) 75%, rgba(143, 143, 143, 0.5) 100%);
+    background: var(--gradient-intermediate);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -44,7 +43,8 @@
 }
 
 .beginner {
-    background: var(--gradient-beginner);
+    background: linear-gradient(180deg,
+            #5C3A21 0%, #CD7F32 30%, #F4A460 50%, #CD7F32 70%, #5C3A21 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -213,16 +213,16 @@
 
 /* Intermediate (Silver) */
 .language-item.intermediate {
-    background-color: rgba(200, 200, 200, 0.1);
-    border-color: rgba(200, 200, 200, 0.3);
+    background-color: var(--intermediate-bg);
+    border-color: var(--intermediate-border);
 }
 
 .language-item.intermediate::before {
-    background: linear-gradient(90deg, transparent, rgba(200, 200, 200, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, var(--intermediate-shine), transparent);
 }
 
 .language-item.intermediate .lang-name {
-    background: linear-gradient(180deg, rgba(143, 143, 143, 0.8) 0%, rgba(230, 230, 230, 0.8) 25%, rgba(255, 255, 255, 0.8) 50%, rgba(230, 230, 230, 0.8) 75%, rgba(143, 143, 143, 0.8) 100%);
+    background: var(--gradient-intermediate);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -231,22 +231,22 @@
 
 .language-item.intermediate:hover {
     transform: translateY(-4px);
-    border-color: rgba(200, 200, 200, 0.6);
-    box-shadow: 0 4px 20px rgba(200, 200, 200, 0.2);
+    border-color: var(--intermediate-border-hover);
+    box-shadow: 0 4px 20px var(--intermediate-shadow-hover);
 }
 
 /* Beginner (Bronze) – if needed */
 .language-item.beginner {
-    background-color: var(--beginner-bg);
-    border-color: var(--beginner-border);
+    background-color: rgba(205, 127, 50, 0.1);
+    border-color: rgba(205, 127, 50, 0.3);
 }
 
 .language-item.beginner::before {
-    background: linear-gradient(90deg, transparent, var(--beginner-shine), transparent);
+    background: linear-gradient(90deg, transparent, rgba(205, 127, 50, 0.3), transparent);
 }
 
 .language-item.beginner .lang-name {
-    background: var(--gradient-beginner);
+    background: linear-gradient(180deg, #5C3A21 0%, #CD7F32 30%, #F4A460 50%, #CD7F32 70%, #5C3A21 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -255,8 +255,8 @@
 
 .language-item.beginner:hover {
     transform: translateY(-4px);
-    border-color: var(--beginner-border-hover);
-    box-shadow: 0 4px 20px var(--beginner-shadow-hover);
+    border-color: rgba(205, 127, 50, 0.6);
+    box-shadow: 0 4px 20px rgba(205, 127, 50, 0.2);
 }
 
 /* ===== TECH ITEMS ===== */
@@ -340,16 +340,16 @@
 
 /* Intermediate */
 .tech.intermediate {
-    background-color: rgba(200, 200, 200, 0.1);
-    border-color: rgba(200, 200, 200, 0.3);
+    background-color: var(--intermediate-bg);
+    border-color: var(--intermediate-border);
 }
 
 .tech.intermediate::before {
-    background: linear-gradient(90deg, transparent, rgba(200, 200, 200, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, var(--intermediate-shine), transparent);
 }
 
 .tech.intermediate span {
-    background: linear-gradient(180deg, rgba(143, 143, 143, 0.8) 0%, rgba(230, 230, 230, 0.8) 25%, rgba(255, 255, 255, 0.8) 50%, rgba(230, 230, 230, 0.8) 75%, rgba(143, 143, 143, 0.8) 100%);
+    background: var(--gradient-intermediate);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -358,22 +358,22 @@
 
 .tech.intermediate:hover {
     transform: translateY(-4px);
-    border-color: rgba(200, 200, 200, 0.6);
-    box-shadow: 0 4px 20px rgba(200, 200, 200, 0.2);
+    border-color: var(--intermediate-border-hover);
+    box-shadow: 0 4px 20px var(--intermediate-shadow-hover);
 }
 
 /* Beginner */
 .tech.beginner {
-    background-color: var(--beginner-bg);
-    border-color: var(--beginner-border);
+    background-color: rgba(205, 127, 50, 0.1);
+    border-color: rgba(205, 127, 50, 0.3);
 }
 
 .tech.beginner::before {
-    background: linear-gradient(90deg, transparent, var(--beginner-shine), transparent);
+    background: linear-gradient(90deg, transparent, rgba(205, 127, 50, 0.3), transparent);
 }
 
 .tech.beginner span {
-    background: var(--gradient-beginner);
+    background: linear-gradient(180deg, #5C3A21 0%, #CD7F32 30%, #F4A460 50%, #CD7F32 70%, #5C3A21 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -382,8 +382,8 @@
 
 .tech.beginner:hover {
     transform: translateY(-4px);
-    border-color: var(--beginner-border-hover);
-    box-shadow: 0 4px 20px var(--beginner-shadow-hover);
+    border-color: rgba(205, 127, 50, 0.6);
+    box-shadow: 0 4px 20px rgba(205, 127, 50, 0.2);
 }
 
 /* ===== CERTIFICATES GRID & SHOW MORE ===== */

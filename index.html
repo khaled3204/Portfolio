@@ -10,7 +10,7 @@
     <script>
         (function () {
             try {
-                var pref = localStorage.getItem('theme-preference') || 'auto';
+                var pref = localStorage.getItem('theme-preference') || 'dark';
                 var resolved = pref === 'auto'
                     ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
                     : pref;

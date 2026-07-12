@@ -462,8 +462,8 @@ document.addEventListener('DOMContentLoaded', function () {
         applyTheme(pref);
     }
 
-    // Apply saved (or default "auto") preference on load
-    const stored = localStorage.getItem(THEME_KEY) || 'auto';
+    // Apply saved (or default "dark") preference on load
+    const stored = localStorage.getItem(THEME_KEY) || 'dark';
     applyTheme(stored);
 
     toggleBtn.addEventListener('click', function (e) {
@@ -491,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // If the user's preference is "auto", keep it in sync with OS changes
     const mql = window.matchMedia('(prefers-color-scheme: light)');
     const handleSystemChange = function () {
-        const current = localStorage.getItem(THEME_KEY) || 'auto';
+        const current = localStorage.getItem(THEME_KEY) || 'dark';
         if (current === 'auto') applyTheme('auto');
     };
     if (mql.addEventListener) {

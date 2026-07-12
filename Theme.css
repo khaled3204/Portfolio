@@ -30,15 +30,15 @@
     --success-color: #4CAF50;
     --error-color: #ff4444;
 
-    /* "Beginner" metallic gradient (legend letter, skill pills).
-       Bronze reads fine on the dark background. */
-    --gradient-beginner: linear-gradient(180deg,
-            #5C3A21 0%, #CD7F32 30%, #F4A460 50%, #CD7F32 70%, #5C3A21 100%);
-    --beginner-bg: rgba(205, 127, 50, 0.1);
-    --beginner-border: rgba(205, 127, 50, 0.3);
-    --beginner-border-hover: rgba(205, 127, 50, 0.6);
-    --beginner-shadow-hover: rgba(205, 127, 50, 0.2);
-    --beginner-shine: rgba(205, 127, 50, 0.3);
+    /* "Intermediate" metallic gradient (legend letter, skill pills).
+       Silver reads fine on the dark background. */
+    --gradient-intermediate: linear-gradient(180deg,
+            rgba(143, 143, 143, 0.8) 0%, rgba(230, 230, 230, 0.8) 25%, rgba(255, 255, 255, 0.8) 50%, rgba(230, 230, 230, 0.8) 75%, rgba(143, 143, 143, 0.8) 100%);
+    --intermediate-bg: rgba(200, 200, 200, 0.1);
+    --intermediate-border: rgba(200, 200, 200, 0.3);
+    --intermediate-border-hover: rgba(200, 200, 200, 0.6);
+    --intermediate-shadow-hover: rgba(200, 200, 200, 0.2);
+    --intermediate-shine: rgba(200, 200, 200, 0.3);
 }
 
 [data-theme="light"] {
@@ -67,16 +67,16 @@
     --success-color: #2E7D32;
     --error-color: #D32F2F;
 
-    /* Bronze is nearly invisible on a light background (its lightest
-       stop is close to white), so in light mode we swap it for a
+    /* Silver is nearly invisible on a light background (it's a
+       white-ish gradient), so in light mode we swap it for a
        black/graphite metallic gradient with the same shine shape. */
-    --gradient-beginner: linear-gradient(180deg,
+    --gradient-intermediate: linear-gradient(180deg,
             #101010 0%, #3A3A3A 30%, #6B6B6B 50%, #3A3A3A 70%, #101010 100%);
-    --beginner-bg: rgba(16, 16, 16, 0.06);
-    --beginner-border: rgba(16, 16, 16, 0.25);
-    --beginner-border-hover: rgba(16, 16, 16, 0.5);
-    --beginner-shadow-hover: rgba(16, 16, 16, 0.15);
-    --beginner-shine: rgba(16, 16, 16, 0.15);
+    --intermediate-bg: rgba(16, 16, 16, 0.06);
+    --intermediate-border: rgba(16, 16, 16, 0.25);
+    --intermediate-border-hover: rgba(16, 16, 16, 0.5);
+    --intermediate-shadow-hover: rgba(16, 16, 16, 0.15);
+    --intermediate-shine: rgba(16, 16, 16, 0.15);
 }
 
 /* Smooth transition when switching themes */
