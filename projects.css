@@ -6,18 +6,21 @@
     padding: 0 60px;
     padding-bottom: 80px;
     position: relative;
-    background-color: #0A0A0A;
+    background-color: var(--bg-primary);
 }
 
 .projects-section h2 {
-    color: #9B8DFF;
+    color: var(--accent-purple);
     font-family: 'Outfit', 'Segoe UI', sans-serif;
     font-weight: 700;
     font-size: 36px;
     margin-bottom: 40px;
 }
 
-/* Simple card grid - NO sticky stacking */
+/* Stacking card layout: each card is position:sticky with an
+   increasing top offset (set via JS -> --stack-top / --stack-z),
+   so as you scroll, the next card slides up and covers the previous
+   one, leaving just its top edge ("tip") peeking out above it. */
 .projects-stack {
     display: flex;
     flex-direction: column;
@@ -29,10 +32,13 @@
 
 .project-card {
     width: 100%;
-    background: #1E1E1E;
+    background: var(--bg-secondary);
     border-radius: 70px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px var(--shadow-strong);
+    position: sticky;
+    top: var(--stack-top, 130px);
+    z-index: var(--stack-z, 1);
 }
 
 .card-inner {
@@ -50,7 +56,7 @@
 }
 
 .project-title {
-    color: #FFD700;
+    color: var(--accent-gold);
     font-size: 28px;
     font-weight: 700;
     font-family: 'Outfit', sans-serif;
@@ -59,7 +65,7 @@
 }
 
 .project-desc {
-    color: #B0B0B0;
+    color: var(--text-secondary);
     font-size: 16px;
     line-height: 1.6;
     margin: 0 0 30px 0;
@@ -70,7 +76,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: #FFFFFF;
+    color: var(--text-primary);
     font-weight: 600;
     text-decoration: none;
     font-size: 16px;
@@ -79,7 +85,7 @@
 }
 
 .Live-project:hover {
-    color: #FFD700;
+    color: var(--accent-gold);
 }
 
 .arrow-icon {
@@ -134,5 +140,11 @@
 
     .projects-stack {
         gap: 30px;
+    }
+
+    /* Stacking works best with more screen real estate; on small
+       screens we keep cards in normal flow so nothing gets clipped. */
+    .project-card {
+        position: static;
     }
 }

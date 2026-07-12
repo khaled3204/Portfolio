@@ -5,6 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khaled Al Chalati</title>
+
+    <!-- Set the theme before CSS/paint to avoid a flash of the wrong theme -->
+    <script>
+        (function () {
+            try {
+                var pref = localStorage.getItem('theme-preference') || 'auto';
+                var resolved = pref === 'auto'
+                    ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+                    : pref;
+                document.documentElement.setAttribute('data-theme', resolved);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+    <link rel="stylesheet" href="theme.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="skills.css">
     <link rel="stylesheet" href="projects.css">
@@ -24,8 +41,57 @@
             <a href="#projects-section">Projects</a>
             <a href="./assets/Khaled_Al_Chalati_Resume.pdf" target="_blank">Resume</a>
         </nav>
-        <div class="contact-icon" id="navContactIcon">
-            <img src="assets/Contact.svg" alt="contact">
+
+        <div class="navbar-right">
+            <!-- THEME TOGGLE (Light / Dark / Auto) -->
+            <div class="theme-toggle" id="themeToggle">
+                <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Toggle color theme"
+                    aria-haspopup="true" aria-expanded="false">
+                    <svg id="themeIconLight" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" viewBox="0 0 16 16" style="display:none;">
+                        <path
+                            d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
+                    </svg>
+                    <svg id="themeIconDark" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" viewBox="0 0 16 16" style="display:none;">
+                        <path
+                            d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278" />
+                    </svg>
+                    <svg id="themeIconAuto" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" viewBox="0 0 16 16" style="display:none;">
+                        <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16" />
+                    </svg>
+                </button>
+                <div class="theme-menu" id="themeMenu" role="menu">
+                    <button class="theme-option" type="button" data-theme-choice="light" role="menuitem">
+                        <svg class="theme-option-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
+                        </svg>
+                        <span>Light</span>
+                    </button>
+                    <button class="theme-option" type="button" data-theme-choice="dark" role="menuitem">
+                        <svg class="theme-option-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278" />
+                        </svg>
+                        <span>Dark</span>
+                    </button>
+                    <button class="theme-option" type="button" data-theme-choice="auto" role="menuitem">
+                        <svg class="theme-option-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16" />
+                        </svg>
+                        <span>Auto</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="contact-icon" id="navContactIcon">
+                <img src="assets/Contact.svg" alt="contact">
+            </div>
         </div>
     </header>
 
@@ -242,9 +308,12 @@
                     <div class="card-left">
                         <h3 class="project-title">Taskly – To-Do List Web Website</h3>
                         <p class="project-desc">
-                            Taskly is a modern task and project management website designed to improve productivity and organization. It allows
-                            users to manage projects, track tasks with priorities and due dates, visualize schedules through a calendar view, and
-                            monitor progress with real-time analytics — all within a clean, responsive interface built using modern web
+                            Taskly is a modern task and project management website designed to improve productivity and
+                            organization. It allows
+                            users to manage projects, track tasks with priorities and due dates, visualize schedules
+                            through a calendar view, and
+                            monitor progress with real-time analytics — all within a clean, responsive interface built
+                            using modern web
                             technologies.
                         </p>
                         <a href="https://khaled3204.github.io/taskly/" class="Live-project">
@@ -262,9 +331,12 @@
                     <div class="card-left">
                         <h3 class="project-title">Espresso Escape Coffee Shop Website</h3>
                         <p class="project-desc">
-                            Espresso Escape Coffee Shop Website is a responsive and visually appealing website designed to present a coffee shop’s
-                            menu, atmosphere, and contact information. It features structured navigation, individual coffee detail pages, and a
-                            styled contact form, demonstrating strong fundamentals in HTML, CSS, responsive design, and clean UI layout.
+                            Espresso Escape Coffee Shop Website is a responsive and visually appealing website designed
+                            to present a coffee shop’s
+                            menu, atmosphere, and contact information. It features structured navigation, individual
+                            coffee detail pages, and a
+                            styled contact form, demonstrating strong fundamentals in HTML, CSS, responsive design, and
+                            clean UI layout.
                         </p>
                         <a href="https://khaled3204.github.io/Espresso-Escape-coffee-shop/" class="Live-project">
                             Live project
@@ -281,11 +353,15 @@
                     <div class="card-left">
                         <h3 class="project-title">Discord Bot Developer</h3>
                         <p class="project-desc">
-                            This Discord Bot is a feature-rich server management and entertainment bot built using Python and the discord.py
-                            library. It includes role-restricted administrative tools, interactive commands, direct messaging utilities, polling
+                            This Discord Bot is a feature-rich server management and entertainment bot built using
+                            Python and the discord.py
+                            library. It includes role-restricted administrative tools, interactive commands, direct
+                            messaging utilities, polling
                             features, and a custom roulette system with dynamic image generation.
-                            The bot also supports multilingual name rendering (including Arabic), advanced permission handling, and automated
-                            moderation features, demonstrating strong backend logic, API integration, and event-driven programming principles.
+                            The bot also supports multilingual name rendering (including Arabic), advanced permission
+                            handling, and automated
+                            moderation features, demonstrating strong backend logic, API integration, and event-driven
+                            programming principles.
                         </p>
                         <a href="#" class="Live-project" id="discordLiveLink">
                             Live project
@@ -304,22 +380,25 @@
     <section class="contact-section" id="contact-section">
         <h2>Contact Me</h2>
         <div class="contact-container">
-            <form class="contact-form" id="contactForm">
+            <form class="contact-form" id="contactForm" novalidate>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" placeholder="Your name" required />
+                    <small class="field-hint" id="nameHint"></small>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="your@email.com" required />
+                    <small class="field-hint" id="emailHint"></small>
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+                    <textarea id="message" name="message" rows="5" placeholder="Write your message..."
+                        required></textarea>
+                    <small class="field-hint" id="messageHint"></small>
                 </div>
                 <button type="submit" class="submit-btn" id="submitBtn">
                     <span id="btnText">Send Message</span>
-                    <span id="btnLoader" class="loader loader-hidden">⏳</span>
                     <img src="assets/arrow.svg" alt="send" class="arrow-icon" />
                 </button>
                 <div id="formFeedback" class="form-feedback"></div>

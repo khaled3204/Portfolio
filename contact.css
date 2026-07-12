@@ -9,7 +9,7 @@
 }
 
 .contact-section h2 {
-    color: #9B8DFF;
+    color: var(--accent-purple);
     font-family: 'Outfit', 'Segoe UI', sans-serif;
     font-weight: 700;
     font-size: 36px;
@@ -39,7 +39,7 @@
 }
 
 .form-group label {
-    color: #B0B0B0;
+    color: var(--text-secondary);
     font-family: 'Outfit', sans-serif;
     font-weight: 600;
     font-size: 14px;
@@ -49,31 +49,60 @@
 
 .form-group input,
 .form-group textarea {
-    background: #1E1E1E;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--input-bg);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
     padding: 14px 16px;
     font-family: 'Outfit', sans-serif;
     font-size: 16px;
-    color: #FFFFFF;
+    color: var(--text-primary);
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: #9B8DFF;
+    border-color: var(--accent-purple);
     box-shadow: 0 0 0 3px rgba(155, 141, 255, 0.15);
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: #6B6B6B;
+    color: var(--text-muted);
 }
 
 .form-group textarea {
     resize: vertical;
     min-height: 120px;
+}
+
+/* Field validation state */
+.form-group input.field-invalid,
+.form-group textarea.field-invalid {
+    border-color: var(--error-color);
+}
+
+.form-group input.field-valid,
+.form-group textarea.field-valid {
+    border-color: var(--success-color);
+}
+
+/* Hint / helper text under each field */
+.field-hint {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    min-height: 16px;
+    transition: color 0.2s ease;
+}
+
+.field-hint.hint-error {
+    color: var(--error-color);
+}
+
+.field-hint.hint-success {
+    color: var(--success-color);
 }
 
 /* Submit Button */
@@ -82,7 +111,7 @@
     align-items: center;
     justify-content: center;
     gap: 12px;
-    background: #9B8DFF;
+    background: var(--accent-purple);
     color: #FFFFFF;
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
@@ -96,9 +125,13 @@
     margin-top: 8px;
 }
 
-.submit-btn:hover {
-    background: #7C6EE4;
+.submit-btn:hover:not(:disabled) {
+    background: var(--accent-purple-hover);
     transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+    cursor: not-allowed;
 }
 
 .submit-btn .arrow-icon {
@@ -107,8 +140,28 @@
     transition: transform 0.3s;
 }
 
-.submit-btn:hover .arrow-icon {
+.submit-btn:hover:not(:disabled) .arrow-icon {
     transform: translateX(4px);
+}
+
+/* Overall form feedback message (above/below the button) */
+.form-feedback {
+    margin-top: 1rem;
+    font-weight: 500;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+}
+
+.form-feedback.feedback-error {
+    color: var(--error-color);
+}
+
+.form-feedback.feedback-success {
+    color: var(--success-color);
+}
+
+.form-feedback.feedback-info {
+    color: var(--text-muted);
 }
 
 /* ---------- RIGHT: INFO ---------- */
@@ -120,7 +173,7 @@
 }
 
 .contact-info h3 {
-    color: #FFD700;
+    color: var(--accent-gold);
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
     font-size: 28px;
@@ -128,7 +181,7 @@
 }
 
 .contact-description {
-    color: #B0B0B0;
+    color: var(--text-secondary);
     font-size: 16px;
     line-height: 1.6;
     margin: 0;
@@ -141,7 +194,7 @@
 }
 
 .info-label {
-    color: #6B6B6B;
+    color: var(--text-muted);
     font-family: 'Outfit', sans-serif;
     font-weight: 600;
     font-size: 13px;
@@ -151,7 +204,7 @@
 
 .info-item a,
 .info-item p {
-    color: #FFFFFF;
+    color: var(--text-primary);
     font-size: 16px;
     text-decoration: none;
     margin: 0;
@@ -159,7 +212,7 @@
 }
 
 .info-item a:hover {
-    color: #9B8DFF;
+    color: var(--accent-purple);
 }
 
 /* Social Links (same style as before) */
@@ -170,20 +223,20 @@
 }
 
 .social-icon {
-    color: #B0B0B0;
+    color: var(--text-secondary);
     font-family: 'Outfit', sans-serif;
     font-weight: 600;
     font-size: 14px;
     text-decoration: none;
     padding: 8px 16px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--border-medium);
     border-radius: 8px;
     transition: all 0.3s;
 }
 
 .social-icon:hover {
-    color: #FFD700;
-    border-color: #FFD700;
+    color: var(--accent-gold);
+    border-color: var(--accent-gold);
 }
 
 /* ---------- RESPONSIVE ---------- */

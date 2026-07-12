@@ -1,0 +1,189 @@
+/* =============================================
+   THEME VARIABLES (Light / Dark / Auto)
+   Dark is the default look of the original design.
+   ============================================= */
+
+:root,
+[data-theme="dark"] {
+    --bg-primary: #0A0A0A;
+    --bg-secondary: #1E1E1E;
+    --bg-tertiary: #262626;
+    --input-bg: #1E1E1E;
+    --card-highlight-bg: rgba(255, 255, 255, 0.03);
+
+    --text-primary: #FFFFFF;
+    --text-secondary: #B0B0B0;
+    --text-body: #E0E0E0;
+    --text-muted: #6B6B6B;
+
+    --accent-purple: #9B8DFF;
+    --accent-purple-hover: #7C6EE4;
+    --accent-gold: #FFD700;
+
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-medium: rgba(255, 255, 255, 0.15);
+
+    --overlay-bg: rgba(0, 0, 0, 0.85);
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --shadow-strong: rgba(0, 0, 0, 0.8);
+
+    --success-color: #4CAF50;
+    --error-color: #ff4444;
+}
+
+[data-theme="light"] {
+    --bg-primary: #F5F5F8;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #EFEFF4;
+    --input-bg: #FFFFFF;
+    --card-highlight-bg: rgba(0, 0, 0, 0.02);
+
+    --text-primary: #16161A;
+    --text-secondary: #55555F;
+    --text-body: #33333B;
+    --text-muted: #8A8A93;
+
+    --accent-purple: #7C6EE4;
+    --accent-purple-hover: #6656CE;
+    --accent-gold: #B8860B;
+
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-medium: rgba(0, 0, 0, 0.12);
+
+    --overlay-bg: rgba(20, 20, 25, 0.6);
+    --shadow-color: rgba(20, 20, 30, 0.12);
+    --shadow-strong: rgba(20, 20, 30, 0.18);
+
+    --success-color: #2E7D32;
+    --error-color: #D32F2F;
+}
+
+/* Smooth transition when switching themes */
+body,
+.navbar,
+.card,
+.service-card,
+.bio-card,
+.skill-slide,
+.slider-arrow,
+.project-card,
+.form-group input,
+.form-group textarea,
+.contact-section,
+.modal-content,
+.cert-item,
+.theme-toggle-btn,
+.theme-menu {
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+/* =============================================
+   THEME TOGGLE (navbar dropdown)
+   ============================================= */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.theme-toggle {
+    position: relative;
+}
+
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-medium);
+    color: var(--accent-purple);
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--accent-purple);
+}
+
+.theme-toggle-btn .theme-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.theme-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    min-width: 150px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-medium);
+    border-radius: 14px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: 0 12px 30px var(--shadow-strong);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    z-index: 1100;
+}
+
+.theme-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 12px;
+    border-radius: 9px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.theme-option .theme-option-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.theme-option:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.theme-option.active {
+    background-color: var(--accent-purple);
+    color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+    .navbar-right {
+        gap: 12px;
+    }
+
+    .theme-toggle-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .theme-menu {
+        right: -8px;
+    }
+}
