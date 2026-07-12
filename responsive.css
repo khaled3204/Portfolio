@@ -1,0 +1,471 @@
+/* =============================================================
+   RESPONSIVE.CSS
+   Central place for phone / small-tablet responsive behaviour.
+   Loaded LAST (after every other stylesheet) so these rules win.
+
+   Breakpoints used:
+     1024px  - large tablets / small laptops (already mostly
+               handled in each section's own file, minor tweaks here)
+     900px   - navbar starts to run out of room
+     640px   - navbar switches to a wrapped 2-row layout
+     480px   - phones
+     380px   - small/older phones
+   ============================================================= */
+
+/* -------------------------------------------------------------
+   Global safety net
+   ------------------------------------------------------------- */
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* =================================================================
+   NAVBAR
+   The single-row navbar (logo + 4 links + theme toggle + contact
+   icon) runs out of horizontal space well before 768px. Below
+   900px we start tightening; below 640px we wrap it into two rows.
+   ================================================================= */
+@media (max-width: 900px) {
+    .navbar {
+        padding: 0 24px;
+    }
+
+    .nav-links {
+        gap: 20px;
+    }
+
+    .nav-links a {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 640px) {
+    html {
+        scroll-padding-top: 132px;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 72px;
+        row-gap: 10px;
+        padding: 14px 20px;
+    }
+
+    .logo {
+        font-size: 17px;
+        order: 1;
+    }
+
+    .navbar-right {
+        order: 2;
+        gap: 12px;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px 18px;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+
+    .contact-icon,
+    .contact-icon img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .theme-toggle-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    /* navbar height is now dynamic, so give sections enough
+       breathing room instead of relying on a fixed 112px offset */
+    .about {
+        padding-top: 148px;
+    }
+}
+
+@media (max-width: 400px) {
+    .navbar {
+        padding: 12px 16px;
+    }
+
+    .logo {
+        font-size: 15px;
+    }
+
+    .nav-links {
+        gap: 6px 12px;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+    .navbar-right {
+        gap: 8px;
+    }
+}
+
+/* =================================================================
+   ABOUT SECTION
+   ================================================================= */
+@media (max-width: 768px) {
+    .about {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .about-container {
+        gap: 32px;
+    }
+
+    .card {
+        padding: 24px 18px 32px;
+        border-radius: 32px;
+        gap: 14px;
+    }
+
+    .card>img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .about-section h1 {
+        font-size: 28px;
+        margin-top: 24px;
+    }
+
+    .about-section p {
+        font-size: 17px;
+        text-align: left;
+    }
+
+    .bio-card {
+        padding: 20px 4px;
+    }
+
+    .bio-card p {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .services-section h2 {
+        font-size: 22px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .service-card {
+        padding: 20px;
+        border-radius: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about {
+        padding-top: 20px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .developer-title {
+        font-size: 16px;
+    }
+
+    .info-item p {
+        font-size: 13px;
+    }
+
+    .social-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 16px;
+    }
+}
+
+/* =================================================================
+   SKILLS SECTION
+   ================================================================= */
+@media (max-width: 768px) {
+    .skills-section {
+        margin-top: 60px;
+        margin-bottom: 50px;
+    }
+
+    .skills-legend {
+        flex-wrap: wrap;
+        gap: 14px 24px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .skills-slider-container {
+        gap: 10px;
+    }
+
+    .slider-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+
+    .skill-slide {
+        padding: 20px 16px;
+    }
+
+    .skill-slide h3,
+    .skill-slide h4 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .language-items,
+    .tech-items {
+        gap: 14px;
+        padding: 16px 0;
+    }
+
+    .tech,
+    .language-item {
+        min-width: 78px;
+        min-height: 78px;
+        padding: 12px 14px;
+        gap: 6px;
+    }
+
+    .tech-icon,
+    .language-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .tech span,
+    .lang-name {
+        font-size: 13px;
+    }
+
+    .certificates-grid {
+        gap: 14px;
+        margin-top: 12px;
+    }
+
+    .cert-item {
+        padding: 16px 10px 14px;
+        border-radius: 16px;
+    }
+
+    .cert-img {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 10px;
+    }
+
+    .cert-name {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .cert-link {
+        font-size: 12px;
+        padding: 5px 14px;
+    }
+
+    .show-more-btn {
+        font-size: 14px;
+        padding: 8px 24px;
+    }
+}
+
+@media (max-width: 360px) {
+    .certificates-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* =================================================================
+   PROJECTS SECTION
+   ================================================================= */
+@media (max-width: 768px) {
+    .projects-section {
+        margin-top: 60px;
+        padding-bottom: 50px;
+    }
+
+    .projects-section h2 {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+
+    .project-card {
+        border-radius: 32px;
+    }
+
+    .card-inner {
+        min-height: unset;
+    }
+
+    .card-left {
+        padding: 24px 20px;
+    }
+
+    .project-title {
+        font-size: 21px;
+        margin-bottom: 12px;
+    }
+
+    .project-desc {
+        font-size: 14px;
+        line-height: 1.55;
+        margin-bottom: 20px;
+    }
+
+    .card-right {
+        padding: 16px 16px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-stack {
+        gap: 22px;
+    }
+
+    .project-card {
+        border-radius: 24px;
+    }
+
+    .card-left {
+        padding: 20px 16px;
+    }
+
+    .project-title {
+        font-size: 19px;
+    }
+
+    .Live-project {
+        font-size: 14px;
+    }
+}
+
+/* =================================================================
+   CONTACT SECTION
+   ================================================================= */
+@media (max-width: 768px) {
+    .contact-section {
+        margin-top: 20px;
+    }
+
+    .contact-section h2 {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+
+    .contact-container {
+        gap: 32px;
+    }
+
+    .contact-info h3 {
+        font-size: 22px;
+    }
+
+    .contact-description {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-section {
+        padding: 0 16px;
+        padding-bottom: 50px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 12px 14px;
+        font-size: 15px;
+    }
+
+    .submit-btn {
+        font-size: 15px;
+        padding: 13px 28px;
+    }
+
+    .social-links {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .social-icon {
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+}
+
+/* =================================================================
+   ACCESS DENIED MODAL
+   ================================================================= */
+@media (max-width: 480px) {
+    .modal-content {
+        border-radius: 32px;
+        padding: 44px 24px 30px;
+    }
+
+    .modal-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 18px;
+    }
+
+    .modal-content h2 {
+        font-size: 26px;
+    }
+
+    .modal-restricted {
+        font-size: 16px;
+    }
+
+    .modal-contact {
+        font-size: 14px;
+    }
+
+    .modal-close {
+        top: 10px;
+        right: 14px;
+        font-size: 28px;
+    }
+}
+
+/* =================================================================
+   THEME MENU (dropdown) on phones
+   ================================================================= */
+@media (max-width: 480px) {
+    .theme-menu {
+        right: -10px;
+        min-width: 136px;
+    }
+
+    .theme-option {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+}
