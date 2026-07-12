@@ -1,23 +1,25 @@
 /* =============================================================
    RESPONSIVE.CSS
-   Central place for phone / small-tablet responsive behaviour.
-   Loaded LAST (after every other stylesheet) so these rules win.
+   The ONLY file on this site that contains @media rules.
+   Every other stylesheet holds base (desktop) styles only.
+   Loaded LAST in index.html so these rules always win.
 
-   Breakpoints used:
-     1024px  - large tablets / small laptops (already mostly
-               handled in each section's own file, minor tweaks here)
-     900px   - navbar starts to run out of room
+   Breakpoints, largest to smallest:
+     1024px  - tablets
+     900px   - navbar starts running out of room
+     768px   - small tablets / large phones
      640px   - navbar switches to a wrapped 2-row layout
      480px   - phones
-     380px   - small/older phones
+     400px   - small phones
+     360px   - very small / older phones
    ============================================================= */
 
 /* -------------------------------------------------------------
    Global safety net
-   NOTE: overflow-x is only set on <html>, never on <body> —
-   giving <body> an overflow value turns it into the nearest
-   scrolling ancestor, which breaks the position:sticky stacking
-   effect on the project cards.
+   NOTE: overflow-x is only ever set on <html>, never on <body>.
+   Giving <body> an overflow value turns it into the nearest
+   scrolling ancestor for its children, which silently breaks
+   position:sticky on the stacking project cards.
    ------------------------------------------------------------- */
 html {
     overflow-x: hidden;
@@ -32,10 +34,56 @@ img {
 }
 
 /* =================================================================
-   NAVBAR
-   The single-row navbar (logo + 4 links + theme toggle + contact
-   icon) runs out of horizontal space well before 768px. Below
-   900px we start tightening; below 640px we wrap it into two rows.
+   1024px — TABLETS
+   ================================================================= */
+@media (max-width: 1024px) {
+
+    /* ---- About ---- */
+    .about-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .right-content {
+        width: 100%;
+    }
+
+    /* ---- Projects ---- */
+    .card-inner {
+        flex-direction: column;
+    }
+
+    .card-right {
+        order: -1;
+        padding: 20px 20px 0 20px;
+    }
+
+    .card-left {
+        padding: 30px;
+    }
+
+    .project-title {
+        font-size: 24px;
+    }
+
+    /* ---- Contact ---- */
+    .contact-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .contact-info {
+        flex: 1;
+    }
+}
+
+/* =================================================================
+   900px — NAVBAR getting tight
    ================================================================= */
 @media (max-width: 900px) {
     .navbar {
@@ -51,6 +99,93 @@ img {
     }
 }
 
+/* =================================================================
+   768px — SMALL TABLETS / LARGE PHONES
+   ================================================================= */
+@media (max-width: 768px) {
+
+    /* ---- About ---- */
+    .about {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ---- Skills ---- */
+    .skills-section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .slider-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .skill-slide {
+        padding: 32px;
+    }
+
+    .tech,
+    .language-item {
+        min-width: 90px;
+        min-height: 90px;
+        padding: 16px 20px;
+    }
+
+    .tech-icon,
+    .language-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .tech span,
+    .lang-name {
+        font-size: 16px;
+    }
+
+    .certificates-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* ---- Projects ----
+       Stacking (position: sticky) needs real screen real estate;
+       below this width cards go back to normal document flow so
+       nothing gets clipped or overlaps awkwardly. */
+    .projects-section {
+        padding: 0 20px;
+        padding-bottom: 60px;
+    }
+
+    .projects-stack {
+        gap: 30px;
+    }
+
+    .project-card {
+        position: static;
+    }
+
+    /* ---- Contact ---- */
+    .contact-section {
+        padding: 0 20px;
+        padding-bottom: 60px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* =================================================================
+   640px — NAVBAR WRAPS TO 2 ROWS
+   The single-row navbar (logo + 4 links + theme toggle + contact
+   icon) physically cannot fit under ~640px, so it wraps here.
+   ================================================================= */
 @media (max-width: 640px) {
     html {
         scroll-padding-top: 132px;
@@ -97,49 +232,30 @@ img {
         height: 38px;
     }
 
-    /* navbar height is now dynamic, so give sections enough
-       breathing room instead of relying on a fixed 112px offset */
+    .theme-menu {
+        right: -8px;
+    }
+
+    /* navbar height is now dynamic, so give the first section
+       enough breathing room instead of relying on a fixed offset */
     .about {
         padding-top: 148px;
     }
 }
 
-@media (max-width: 400px) {
-    .navbar {
-        padding: 12px 16px;
-    }
-
-    .logo {
-        font-size: 15px;
-    }
-
-    .nav-links {
-        gap: 6px 12px;
-    }
-
-    .nav-links a {
-        font-size: 13px;
-    }
-
-    .navbar-right {
-        gap: 8px;
-    }
-}
-
 /* =================================================================
-   ABOUT SECTION
+   480px — PHONES
    ================================================================= */
-@media (max-width: 768px) {
-    .about {
-        padding-left: 16px;
-        padding-right: 16px;
-    }
+@media (max-width: 480px) {
 
-    .about-container {
-        gap: 32px;
+    /* ---- About ---- */
+    .about {
+        padding-top: 20px;
     }
 
     .card {
+        width: 100%;
+        max-width: 100%;
         padding: 24px 18px 32px;
         border-radius: 32px;
         gap: 14px;
@@ -148,50 +264,6 @@ img {
     .card>img {
         width: 120px;
         height: 120px;
-    }
-
-    .about-section h1 {
-        font-size: 28px;
-        margin-top: 24px;
-    }
-
-    .about-section p {
-        font-size: 17px;
-        text-align: left;
-    }
-
-    .bio-card {
-        padding: 20px 4px;
-    }
-
-    .bio-card p {
-        font-size: 16px;
-        text-align: left;
-    }
-
-    .services-section h2 {
-        font-size: 22px;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
-    .service-card {
-        padding: 20px;
-        border-radius: 18px;
-    }
-}
-
-@media (max-width: 480px) {
-    .about {
-        padding-top: 20px;
-    }
-
-    .card {
-        width: 100%;
-        max-width: 100%;
     }
 
     .developer-title {
@@ -207,12 +279,36 @@ img {
         justify-content: center;
         gap: 12px 16px;
     }
-}
 
-/* =================================================================
-   SKILLS SECTION
-   ================================================================= */
-@media (max-width: 768px) {
+    .about-section h1 {
+        font-size: 26px;
+        margin-top: 20px;
+    }
+
+    .about-section p {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .bio-card {
+        padding: 20px 4px;
+    }
+
+    .bio-card p {
+        font-size: 15px;
+        text-align: left;
+    }
+
+    .services-section h2 {
+        font-size: 22px;
+    }
+
+    .service-card {
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    /* ---- Skills ---- */
     .skills-section {
         margin-top: 60px;
         margin-bottom: 50px;
@@ -223,9 +319,7 @@ img {
         gap: 14px 24px;
         font-size: 13px;
     }
-}
 
-@media (max-width: 480px) {
     .skills-slider-container {
         gap: 10px;
     }
@@ -272,6 +366,7 @@ img {
     }
 
     .certificates-grid {
+        grid-template-columns: 1fr;
         gap: 14px;
         margin-top: 12px;
     }
@@ -301,57 +396,18 @@ img {
         font-size: 14px;
         padding: 8px 24px;
     }
-}
 
-@media (max-width: 360px) {
-    .certificates-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-/* =================================================================
-   PROJECTS SECTION
-   ================================================================= */
-@media (max-width: 768px) {
+    /* ---- Projects ---- */
     .projects-section {
         margin-top: 60px;
         padding-bottom: 50px;
     }
 
     .projects-section h2 {
-        font-size: 28px;
+        font-size: 26px;
         margin-bottom: 24px;
     }
 
-    .project-card {
-        border-radius: 32px;
-    }
-
-    .card-inner {
-        min-height: unset;
-    }
-
-    .card-left {
-        padding: 24px 20px;
-    }
-
-    .project-title {
-        font-size: 21px;
-        margin-bottom: 12px;
-    }
-
-    .project-desc {
-        font-size: 14px;
-        line-height: 1.55;
-        margin-bottom: 20px;
-    }
-
-    .card-right {
-        padding: 16px 16px 0;
-    }
-}
-
-@media (max-width: 480px) {
     .projects-stack {
         gap: 22px;
     }
@@ -360,29 +416,42 @@ img {
         border-radius: 24px;
     }
 
+    .card-inner {
+        min-height: unset;
+    }
+
     .card-left {
         padding: 20px 16px;
     }
 
     .project-title {
         font-size: 19px;
+        margin-bottom: 10px;
+    }
+
+    .project-desc {
+        font-size: 14px;
+        line-height: 1.55;
+        margin-bottom: 18px;
     }
 
     .Live-project {
         font-size: 14px;
     }
-}
 
-/* =================================================================
-   CONTACT SECTION
-   ================================================================= */
-@media (max-width: 768px) {
+    .card-right {
+        padding: 16px 16px 0;
+    }
+
+    /* ---- Contact ---- */
     .contact-section {
         margin-top: 20px;
+        padding: 0 16px;
+        padding-bottom: 50px;
     }
 
     .contact-section h2 {
-        font-size: 28px;
+        font-size: 26px;
         margin-bottom: 24px;
     }
 
@@ -397,13 +466,6 @@ img {
     .contact-description {
         font-size: 15px;
     }
-}
-
-@media (max-width: 480px) {
-    .contact-section {
-        padding: 0 16px;
-        padding-bottom: 50px;
-    }
 
     .form-group input,
     .form-group textarea {
@@ -416,21 +478,12 @@ img {
         padding: 13px 28px;
     }
 
-    .social-links {
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-
     .social-icon {
         padding: 7px 14px;
         font-size: 13px;
     }
-}
 
-/* =================================================================
-   ACCESS DENIED MODAL
-   ================================================================= */
-@media (max-width: 480px) {
+    /* ---- Modal ---- */
     .modal-content {
         border-radius: 32px;
         padding: 44px 24px 30px;
@@ -459,12 +512,8 @@ img {
         right: 14px;
         font-size: 28px;
     }
-}
 
-/* =================================================================
-   THEME MENU (dropdown) on phones
-   ================================================================= */
-@media (max-width: 480px) {
+    /* ---- Theme dropdown ---- */
     .theme-menu {
         right: -10px;
         min-width: 136px;
@@ -473,5 +522,39 @@ img {
     .theme-option {
         font-size: 13px;
         padding: 8px 10px;
+    }
+}
+
+/* =================================================================
+   400px — SMALL PHONES
+   ================================================================= */
+@media (max-width: 400px) {
+    .navbar {
+        padding: 12px 16px;
+    }
+
+    .logo {
+        font-size: 15px;
+    }
+
+    .nav-links {
+        gap: 6px 12px;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+    .navbar-right {
+        gap: 8px;
+    }
+}
+
+/* =================================================================
+   360px — VERY SMALL PHONES
+   ================================================================= */
+@media (max-width: 360px) {
+    .certificates-grid {
+        grid-template-columns: 1fr;
     }
 }

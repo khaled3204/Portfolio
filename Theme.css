@@ -194,17 +194,4 @@ body,
     color: #FFFFFF;
 }
 
-@media (max-width: 768px) {
-    .navbar-right {
-        gap: 12px;
-    }
-
-    .theme-toggle-btn {
-        width: 38px;
-        height: 38px;
-    }
-
-    .theme-menu {
-        right: -8px;
-    }
-}
+/* Responsive rules live in responsive.css */

@@ -113,38 +113,4 @@
     border-radius: 20px;
 }
 
-@media (max-width: 1024px) {
-    .card-inner {
-        flex-direction: column;
-    }
-
-    .card-right {
-        order: -1;
-        padding: 20px 20px 0 20px;
-    }
-
-    .card-left {
-        padding: 30px;
-    }
-
-    .project-title {
-        font-size: 24px;
-    }
-}
-
-@media (max-width: 768px) {
-    .projects-section {
-        padding: 0 20px;
-        padding-bottom: 60px;
-    }
-
-    .projects-stack {
-        gap: 30px;
-    }
-
-    /* Stacking works best with more screen real estate; on small
-       screens we keep cards in normal flow so nothing gets clipped. */
-    .project-card {
-        position: static;
-    }
-}
+/* Responsive rules live in responsive.css */

@@ -239,26 +239,12 @@
     border-color: var(--accent-gold);
 }
 
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 1024px) {
-    .contact-container {
-        flex-direction: column;
-        gap: 40px;
-    }
-
-    .contact-info {
-        flex: 1;
-    }
+/* Don't let the browser paint its own default red outline/glow on
+   empty required fields — we handle validation styling ourselves
+   via .field-invalid / .field-valid in script.js */
+.form-group input:invalid,
+.form-group textarea:invalid {
+    box-shadow: none;
 }
 
-@media (max-width: 768px) {
-    .contact-section {
-        padding: 0 20px;
-        padding-bottom: 60px;
-    }
-
-    .submit-btn {
-        width: 100%;
-        justify-content: center;
-    }
-}
+/* Responsive rules live in responsive.css */
