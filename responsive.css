@@ -14,10 +14,16 @@
 
 /* -------------------------------------------------------------
    Global safety net
+   NOTE: overflow-x is only set on <html>, never on <body> —
+   giving <body> an overflow value turns it into the nearest
+   scrolling ancestor, which breaks the position:sticky stacking
+   effect on the project cards.
    ------------------------------------------------------------- */
-html,
-body {
+html {
     overflow-x: hidden;
+}
+
+body {
     width: 100%;
 }
 
