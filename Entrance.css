@@ -1,0 +1,62 @@
+/* =============================================
+   ENTRANCE SCREEN (Spline 3D intro)
+   Covers the whole viewport until the "Enter Portfolio"
+   button *inside the Spline scene* is clicked. Nothing
+   else is visible/scrollable until then.
+   ============================================= */
+.entrance-screen {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-primary);
+    z-index: 10000;
+}
+
+/* the entrance viewer – scaled up to appear bigger */
+spline-viewer.entrance {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100% !important;
+    height: 100% !important;
+    transform: translate(-50%, -50%) scale(1.2);
+    /* zoom in 1.2x */
+    transform-origin: center center;
+    z-index: 0;
+    /* remove any old offsets */
+    right: auto !important;
+    bottom: auto !important;
+}
+
+/* Fades the entrance screen out smoothly before removal */
+.entrance-screen.entrance-fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+/* Main site is hidden (and unscrollable) while the entrance
+   screen is showing */
+.site-hidden {
+    display: none;
+}
+
+/* =============================================
+   CONTACT SECTION — second Spline viewer
+   Sits to the right of the "Let's talk" heading.
+   ============================================= */
+.contact-info-heading {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15%;
+}
+
+.contact-info-heading h3 {
+    margin-bottom: 0;
+}
+
+
+/* Responsive rules live in responsive.css */

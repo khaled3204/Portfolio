@@ -1,4 +1,62 @@
 // =============================================
+// 0. Entrance Screen (Spline intro) - FIXED
+// =============================================
+document.addEventListener('DOMContentLoaded', function () {
+    const entranceScreen = document.getElementById('entranceScreen');
+    const entranceViewer = document.getElementById('entranceViewer');
+    const siteContent = document.getElementById('siteContent');
+
+    if (entranceScreen && entranceViewer && siteContent) {
+        // Lock scrolling until the user enters
+        document.documentElement.style.overflow = 'hidden';
+
+        function revealSite() {
+            entranceScreen.classList.add('entrance-fade-out');
+            siteContent.classList.remove('site-hidden');
+            document.documentElement.style.overflow = '';
+
+            // Remove the entrance screen from the DOM after fade
+            setTimeout(function () {
+                entranceScreen.remove();
+            }, 500);
+        }
+
+        function attachClickHandler() {
+            // Use 'click' – more reliable than 'mouseDown'
+            entranceViewer.addEventListener('click', function (e) {
+                // Try to get the clicked object name from various locations
+                let objectName = '';
+                if (e.target && typeof e.target.name === 'string') {
+                    objectName = e.target.name;
+                } else if (e.detail && e.detail.target && typeof e.detail.target.name === 'string') {
+                    objectName = e.detail.target.name;
+                } else if (e.detail && typeof e.detail.name === 'string') {
+                    objectName = e.detail.name;
+                }
+
+                console.log('Spline object clicked:', objectName);
+
+                // Trigger reveal if name contains "enter" or "button" – or fallback to any click
+                const lower = objectName.toLowerCase();
+                if (lower.includes('enter') || lower.includes('button') || objectName === '') {
+                    revealSite();
+                }
+            });
+        }
+
+        // Attach when the Spline viewer loads
+        entranceViewer.addEventListener('load', function () {
+            attachClickHandler();
+        });
+
+        // Fallback: if 'load' never fires, attach after 3 seconds
+        setTimeout(function () {
+            attachClickHandler();
+        }, 3000);
+    }
+});
+
+// =============================================
 // 1. Skills Slider
 // =============================================
 document.addEventListener('DOMContentLoaded', function () {
@@ -58,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // =============================================
     // 2. NAVIGATION - Smooth scroll to sections
-    //    (FIX: only intercept hash links, not external/PDF links)
     // =============================================
     const navLinks = document.querySelectorAll('.nav-links a');
     const contactIcon = document.querySelector('.contact-icon');
@@ -66,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function () {
     navLinks.forEach(link => {
         link.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            // Only handle internal links that start with '#'
             if (href && href.startsWith('#')) {
                 e.preventDefault();
                 const targetElement = document.querySelector(href);
@@ -74,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
                 }
             }
-            // For any other link (like the Resume PDF), do nothing – let the default behavior happen
         });
     });
 
@@ -95,7 +150,6 @@ document.addEventListener('DOMContentLoaded', function () {
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            // Get form data
             const formData = new FormData(contactForm);
             const data = {
                 name: formData.get('name'),
@@ -103,12 +157,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 message: formData.get('message')
             };
 
-            // Get the submit button for loading state
             const submitBtn = contactForm.querySelector('.submit-btn');
             const btnText = document.getElementById('btnText');
             const formFeedback = document.getElementById('formFeedback');
 
-            // Show loading state
             if (btnText) btnText.textContent = 'Sending...';
             submitBtn.disabled = true;
             if (formFeedback) {
@@ -133,12 +185,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         formFeedback.className = 'form-feedback feedback-success';
                     }
                     contactForm.reset();
-                    // Reset field hints back to their default helper text
                     if (typeof resetFieldHints === 'function') resetFieldHints();
                 } else {
-                    const errorMessage = result.error
-                        ? result.error
-                        : 'Please try again later.';
+                    const errorMessage = result.error || 'Please try again later.';
                     if (formFeedback) {
                         formFeedback.textContent = `❌ Failed to send message. ${errorMessage}`;
                         formFeedback.className = 'form-feedback feedback-error';
@@ -146,18 +195,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.error('Server error:', result);
                 }
             } catch (error) {
-                const errorMessage = error.message
-                    ? error.message
-                    : 'Please check your connection and try again.';
+                const errorMessage = error.message || 'Please check your connection and try again.';
                 if (formFeedback) {
                     formFeedback.textContent = `❌ Network error. ${errorMessage}`;
                     formFeedback.className = 'form-feedback feedback-error';
                 }
                 console.error('Network error:', error);
             } finally {
-                // Restore button
                 if (btnText) btnText.textContent = 'Send Message';
-                // Re-run validation to correctly set disabled state again
                 if (typeof validateForm === 'function') validateForm();
             }
         });
@@ -231,8 +276,8 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-let resetFieldHints; // exposed to the submit handler above
-let validateForm;    // exposed to the submit handler above
+let resetFieldHints;
+let validateForm;
 
 document.addEventListener('DOMContentLoaded', function () {
     const contactForm = document.getElementById('contactForm');
@@ -256,12 +301,9 @@ document.addEventListener('DOMContentLoaded', function () {
             message: `At least ${MIN_MESSAGE_LENGTH} characters — tell me a bit about what you need.`
         };
 
-        // Track whether the user has actually interacted with each field,
-        // so we don't show red errors before they've even started typing.
         const touched = { name: false, email: false, message: false };
 
         function setHint(hintEl, inputEl, message, state) {
-            // state: 'default' | 'error' | 'success'
             if (!hintEl) return;
             hintEl.textContent = message;
             hintEl.classList.remove('hint-error', 'hint-success');
@@ -353,8 +395,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 submitBtn.style.cursor = isValid ? 'pointer' : 'not-allowed';
             }
 
-            // Overall feedback line — only nag the user once they've started
-            // interacting with the form, so it isn't red before they type anything.
             const hasStartedTyping = touched.name || touched.email || touched.message;
             if (formFeedback) {
                 if (isValid) {
@@ -369,7 +409,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return isValid;
         };
 
-        // Initialize hints with default helper text
         resetFieldHints();
 
         if (nameInput) {
@@ -385,28 +424,22 @@ document.addEventListener('DOMContentLoaded', function () {
             messageInput.addEventListener('blur', () => { touched.message = true; validateForm(); });
         }
 
-        // Initial disabled state (form is empty, so disabled, but no red errors yet)
         validateForm();
     }
 });
 
 // =============================================
 // 5. Stacking Project Cards
-//    Gives each .project-card an increasing `top` offset and z-index
-//    via CSS custom properties, so cards stack on top of one another
-//    as the user scrolls, leaving a "tip" of each previous card visible.
 // =============================================
 document.addEventListener('DOMContentLoaded', function () {
     const cards = document.querySelectorAll('.project-card');
     if (!cards.length) return;
 
     const NAVBAR_HEIGHT = 112;
-    const BASE_GAP = 18;      // space below navbar before the first card sticks
-    const STACK_OFFSET = 42;  // how much of each previous card's "tip" stays visible
+    const BASE_GAP = 18;
+    const STACK_OFFSET = 42;
 
     function applyStackOffsets() {
-        // On narrow screens the CSS switches cards to position: static,
-        // so the offsets don't matter there — but we still set them safely.
         cards.forEach((card, index) => {
             const top = NAVBAR_HEIGHT + BASE_GAP + index * STACK_OFFSET;
             card.style.setProperty('--stack-top', `${top}px`);
@@ -462,7 +495,6 @@ document.addEventListener('DOMContentLoaded', function () {
         applyTheme(pref);
     }
 
-    // Apply saved (or default "dark") preference on load
     const stored = localStorage.getItem(THEME_KEY) || 'dark';
     applyTheme(stored);
 
@@ -488,7 +520,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // If the user's preference is "auto", keep it in sync with OS changes
     const mql = window.matchMedia('(prefers-color-scheme: light)');
     const handleSystemChange = function () {
         const current = localStorage.getItem(THEME_KEY) || 'dark';
@@ -497,7 +528,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (mql.addEventListener) {
         mql.addEventListener('change', handleSystemChange);
     } else if (mql.addListener) {
-        // Safari fallback
         mql.addListener(handleSystemChange);
     }
 })();

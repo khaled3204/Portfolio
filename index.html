@@ -27,424 +27,469 @@
     <link rel="stylesheet" href="projects.css">
     <link rel="stylesheet" href="contact.css">
     <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="entrance.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="responsive.css">
+
+    <!-- Additional styles for the About Spline viewer -->
+    <style>
+        .about-bio-wrapper {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        spline-viewer.about-viewer {
+            flex-shrink: 0;
+            width: 340px;
+            height: 340px;
+        }
+
+        /* Override contact-viewer – hide it since we moved it */
+        spline-viewer.contact-viewer {
+            display: none !important;
+        }
+    </style>
+
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.98/build/spline-viewer.js"></script>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <div class="logo">Khaled Al Chalati</div>
-        <nav class="nav-links">
-            <a href="#about-section">About</a>
-            <a href="#skills-section">Skills</a>
-            <a href="#projects-section">Projects</a>
-            <a href="./assets/Khaled_Al_Chalati_Resume.pdf" target="_blank">Resume</a>
-        </nav>
+    <!-- ===== ENTRANCE SCREEN ===== -->
+    <div class="entrance-screen" id="entranceScreen">
+        <spline-viewer class="entrance" hide-watermark id="entranceViewer"
+            url="https://prod.spline.design/WGJMpEJbazkFM4Bu/scene.splinecode">
+        </spline-viewer>
+    </div>
 
-        <div class="navbar-right">
-            <!-- THEME TOGGLE (Light / Dark / Auto) -->
-            <div class="theme-toggle" id="themeToggle">
-                <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Toggle color theme"
-                    aria-haspopup="true" aria-expanded="false">
-                    <svg id="themeIconLight" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="16"
-                        height="16" fill="currentColor" viewBox="0 0 16 16" style="display:none;">
-                        <path
-                            d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
-                    </svg>
-                    <svg id="themeIconDark" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                        fill="currentColor" viewBox="0 0 16 16" style="display:none;">
-                        <path
-                            d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278" />
-                    </svg>
-                    <svg id="themeIconAuto" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                        fill="currentColor" viewBox="0 0 16 16" style="display:none;">
-                        <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16" />
-                    </svg>
-                </button>
-                <div class="theme-menu" id="themeMenu" role="menu">
-                    <button class="theme-option" type="button" data-theme-choice="light" role="menuitem">
-                        <svg class="theme-option-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            fill="currentColor" viewBox="0 0 16 16">
+    <!-- MAIN SITE CONTENT (hidden until "Enter Portfolio" is clicked) -->
+    <div id="siteContent" class="site-hidden">
+
+        <!-- NAVBAR -->
+        <header class="navbar">
+            <div class="logo">Khaled Al Chalati</div>
+            <nav class="nav-links">
+                <a href="#about-section">About</a>
+                <a href="#skills-section">Skills</a>
+                <a href="#projects-section">Projects</a>
+                <a href="./assets/Khaled_Al_Chalati_Resume.pdf" target="_blank">Resume</a>
+            </nav>
+
+            <div class="navbar-right">
+                <!-- THEME TOGGLE (Light / Dark / Auto) -->
+                <div class="theme-toggle" id="themeToggle">
+                    <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Toggle color theme"
+                        aria-haspopup="true" aria-expanded="false">
+                        <svg id="themeIconLight" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" viewBox="0 0 16 16" style="display:none;">
                             <path
                                 d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
                         </svg>
-                        <span>Light</span>
-                    </button>
-                    <button class="theme-option" type="button" data-theme-choice="dark" role="menuitem">
-                        <svg class="theme-option-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            fill="currentColor" viewBox="0 0 16 16">
+                        <svg id="themeIconDark" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" viewBox="0 0 16 16" style="display:none;">
                             <path
                                 d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278" />
                         </svg>
-                        <span>Dark</span>
-                    </button>
-                    <button class="theme-option" type="button" data-theme-choice="auto" role="menuitem">
-                        <svg class="theme-option-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            fill="currentColor" viewBox="0 0 16 16">
+                        <svg id="themeIconAuto" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" viewBox="0 0 16 16" style="display:none;">
                             <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16" />
                         </svg>
-                        <span>Auto</span>
                     </button>
-                </div>
-            </div>
-
-            <div class="contact-icon" id="navContactIcon">
-                <img src="assets/Contact.svg" alt="contact">
-            </div>
-        </div>
-    </header>
-
-    <!-- ABOUT SECTION -->
-    <section class="about" id="about-section">
-        <div class="about-container">
-            <div class="card">
-                <img src="assets/Profile.svg" alt="profile">
-                <h2 class="developer-title">Full Stack Web Developer</h2>
-                <div class="info-item">
-                    <span class="info-label">AGE</span>
-                    <p>22</p>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Address</span>
-                    <p>İstanbul, Türkiye</p>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Languages</span>
-                    <p>Arabic, English, Turkish</p>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Interests</span>
-                    <p>Nature & Outdoor Activities</p>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Sport</span>
-                    <p>Table Tennis</p>
-                </div>
-                <div class="social-links">
-                    <a href="https://github.com/khaled3204" class="social-icon" target="_blank"
-                        rel="noopener noreferrer">GitHub</a>
-                    <a href="https://www.linkedin.com/in/khaled-alshalaty-24a47b309/" class="social-icon"
-                        target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    <a href="https://wa.me/+905551703775" class="social-icon" target="_blank"
-                        rel="noopener noreferrer">Whatsapp</a>
-                </div>
-            </div>
-
-            <div class="right-content">
-                <div class="about-section">
-                    <h1>About</h1>
-                    <div class="bio-card">
-                        <p>Hello! I'm a recent Software Engineering graduate from Nişantaşı University in Istanbul. My
-                            journey in tech started with a curiosity for how things work, which evolved into a passion
-                            for building them.</p>
-                        <p>I thrive at the intersection of design and functionality, creating applications that are both
-                            beautiful and performant. Currently, I'm focused on full-stack development while exploring
-                            new technologies.</p>
-                        <p>Living in Istanbul has given me a unique perspective, blending Eastern and Western influences
-                            in my approach to problem-solving and design.</p>
+                    <div class="theme-menu" id="themeMenu" role="menu">
+                        <button class="theme-option" type="button" data-theme-choice="light" role="menuitem">
+                            <svg class="theme-option-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" viewBox="0 0 16 16">
+                                <path
+                                    d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
+                            </svg>
+                            <span>Light</span>
+                        </button>
+                        <button class="theme-option" type="button" data-theme-choice="dark" role="menuitem">
+                            <svg class="theme-option-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" viewBox="0 0 16 16">
+                                <path
+                                    d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278" />
+                            </svg>
+                            <span>Dark</span>
+                        </button>
+                        <button class="theme-option" type="button" data-theme-choice="auto" role="menuitem">
+                            <svg class="theme-option-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16" />
+                            </svg>
+                            <span>Auto</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="services-section">
-                    <h2>My Services</h2>
-                    <div class="services-grid">
-                        <div class="service-card">
-                            <h3>Frontend Web Development</h3>
-                            <ul>
-                                <li>Interactive web applications</li>
-                                <li>Modern UI/UX design</li>
-                                <li>Responsive and accessible layouts</li>
-                                <li>Optimized performance and SEO</li>
-                            </ul>
+                <div class="contact-icon" id="navContactIcon">
+                    <img src="assets/Contact.svg" alt="contact">
+                </div>
+            </div>
+        </header>
+
+        <!-- ABOUT SECTION -->
+        <section class="about" id="about-section">
+            <div class="about-container">
+                <div class="card">
+                    <img src="assets/Profile.svg" alt="profile">
+                    <h2 class="developer-title">Full Stack Web Developer</h2>
+                    <div class="info-item">
+                        <span class="info-label">AGE</span>
+                        <p>22</p>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Address</span>
+                        <p>İstanbul, Türkiye</p>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Languages</span>
+                        <p>Arabic, English, Turkish</p>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Interests</span>
+                        <p>Nature & Outdoor Activities</p>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Sport</span>
+                        <p>Table Tennis</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/khaled3204" class="social-icon" target="_blank"
+                            rel="noopener noreferrer">GitHub</a>
+                        <a href="https://www.linkedin.com/in/khaled-alshalaty-24a47b309/" class="social-icon"
+                            target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <a href="https://wa.me/+905551703775" class="social-icon" target="_blank"
+                            rel="noopener noreferrer">Whatsapp</a>
+                    </div>
+                </div>
+
+                <div class="right-content">
+                    <div class="about-section">
+                        <h1>About</h1>
+                        <!-- NEW: Bio wrapper with Spline viewer next to text -->
+                        <div class="about-bio-wrapper">
+                            <div class="bio-card">
+                                <p>Hello! I'm a recent Software Engineering graduate from Nişantaşı University in
+                                    Istanbul.
+                                    My journey in tech started with a curiosity for how things work, which evolved into
+                                    a
+                                    passion for building them.</p>
+                                <p>I thrive at the intersection of design and functionality, creating applications that
+                                    are
+                                    both beautiful and performant. Currently, I'm focused on full-stack development
+                                    while
+                                    exploring new technologies.</p>
+                                <p>Living in Istanbul has given me a unique perspective, blending Eastern and Western
+                                    influences in my approach to problem-solving and design.</p>
+                            </div>
+                            <!-- Spline 3D character next to bio text -->
+                            <spline-viewer class="about-viewer"
+                                url="https://prod.spline.design/QUmOs-7NxKHYLn1h/scene.splinecode">
+                            </spline-viewer>
                         </div>
-                        <div class="service-card">
-                            <h3>Backend Web Development</h3>
-                            <ul>
-                                <li>Scalable API development</li>
-                                <li>Database design and management</li>
-                                <li>Secure authentication systems</li>
-                                <li>Performance-driven backend solutions</li>
-                            </ul>
-                        </div>
-                        <div class="service-card">
-                            <h3>Software & Systems Engineering</h3>
-                            <ul>
-                                <li>End-to-end product development</li>
-                                <li>Software optimization & debugging</li>
-                                <li>System architecture optimization</li>
-                                <li>Continuous maintenance and support</li>
-                            </ul>
+                    </div>
+
+                    <div class="services-section">
+                        <h2>My Services</h2>
+                        <div class="services-grid">
+                            <div class="service-card">
+                                <h3>Frontend Web Development</h3>
+                                <ul>
+                                    <li>Interactive web applications</li>
+                                    <li>Modern UI/UX design</li>
+                                    <li>Responsive and accessible layouts</li>
+                                    <li>Optimized performance and SEO</li>
+                                </ul>
+                            </div>
+                            <div class="service-card">
+                                <h3>Backend Web Development</h3>
+                                <ul>
+                                    <li>Scalable API development</li>
+                                    <li>Database design and management</li>
+                                    <li>Secure authentication systems</li>
+                                    <li>Performance-driven backend solutions</li>
+                                </ul>
+                            </div>
+                            <div class="service-card">
+                                <h3>Software & Systems Engineering</h3>
+                                <ul>
+                                    <li>End-to-end product development</li>
+                                    <li>Software optimization & debugging</li>
+                                    <li>System architecture optimization</li>
+                                    <li>Continuous maintenance and support</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- SKILLS SECTION -->
-    <section class="skills-section" id="skills-section">
-        <h2>Skills</h2>
-        <div class="skills-legend">
-            <span><strong class="proficient">P</strong> Proficient</span>
-            <span><strong class="intermediate">I</strong> Intermediate</span>
-            <span><strong class="beginner">B</strong> Beginner</span>
-        </div>
-        <div class="skills-slider-container">
-            <button class="slider-arrow prev" id="prevBtn">←</button>
-            <div class="skills-slider-wrapper">
-                <div class="skills-slider" id="skillsSlider">
-                    <div class="skill-slide">
-                        <h3>Spoken Languages</h3>
-                        <div class="language-items">
-                            <div class="language-item proficient">
-                                <img src="assets/turkish.png" alt="TR" class="language-icon">
-                                <span class="lang-name">Turkish</span>
-                            </div>
-                            <div class="language-item intermediate">
-                                <img src="assets/Eng.svg" alt="EN" class="language-icon">
-                                <span class="lang-name">English</span>
-                            </div>
-                            <div class="language-item proficient">
-                                <img src="assets/arabic.png" alt="AR" class="language-icon">
-                                <span class="lang-name">Arabic</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-slide">
-                        <h3>Programming & Development</h3>
-                        <h4>Web Technologies</h4>
-                        <div class="tech-items">
-                            <div class="tech proficient">
-                                <img src="assets/Js.png" alt="JS" class="tech-icon">
-                                <span>JavaScript</span>
-                            </div>
-                            <div class="tech intermediate">
-                                <img src="assets/c++.png" alt="C++" class="tech-icon">
-                                <span>C++</span>
-                            </div>
-                            <div class="tech intermediate">
-                                <img src="assets/C.png" alt="C" class="tech-icon">
-                                <span>C</span>
-                            </div>
-                            <div class="tech intermediate">
-                                <img src="assets/python.png" alt="Python" class="tech-icon">
-                                <span>Python</span>
-                            </div>
-                            <div class="tech proficient">
-                                <img src="assets/html.png" alt="HTML" class="tech-icon">
-                                <span>HTML</span>
-                            </div>
-                            <div class="tech beginner">
-                                <img src="assets/mysql.png" alt="MySQL" class="tech-icon">
-                                <span>MySQL</span>
+        <!-- SKILLS SECTION -->
+        <section class="skills-section" id="skills-section">
+            <h2>Skills</h2>
+            <div class="skills-legend">
+                <span><strong class="proficient">P</strong> Proficient</span>
+                <span><strong class="intermediate">I</strong> Intermediate</span>
+                <span><strong class="beginner">B</strong> Beginner</span>
+            </div>
+            <div class="skills-slider-container">
+                <button class="slider-arrow prev" id="prevBtn">←</button>
+                <div class="skills-slider-wrapper">
+                    <div class="skills-slider" id="skillsSlider">
+                        <div class="skill-slide">
+                            <h3>Spoken Languages</h3>
+                            <div class="language-items">
+                                <div class="language-item proficient">
+                                    <img src="assets/turkish.png" alt="TR" class="language-icon">
+                                    <span class="lang-name">Turkish</span>
+                                </div>
+                                <div class="language-item intermediate">
+                                    <img src="assets/Eng.svg" alt="EN" class="language-icon">
+                                    <span class="lang-name">English</span>
+                                </div>
+                                <div class="language-item proficient">
+                                    <img src="assets/arabic.png" alt="AR" class="language-icon">
+                                    <span class="lang-name">Arabic</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="skill-slide">
-                        <h3>Certificates</h3>
-                        <div class="certificates-grid" id="certsGrid">
-                            <div class="cert-item">
-                                <img src="assets/Certificate/green.png" alt="Green Software Practitioner"
-                                    class="cert-img">
-                                <p class="cert-name">Green Software Practitioner</p>
-                                <a href="assets/Certificate/Green_software.pdf" class="cert-link" target="_blank"
-                                    rel="noopener noreferrer">View PDF</a>
+                        <div class="skill-slide">
+                            <h3>Programming & Development</h3>
+                            <h4>Web Technologies</h4>
+                            <div class="tech-items">
+                                <div class="tech proficient">
+                                    <img src="assets/Js.png" alt="JS" class="tech-icon">
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="tech intermediate">
+                                    <img src="assets/c++.png" alt="C++" class="tech-icon">
+                                    <span>C++</span>
+                                </div>
+                                <div class="tech intermediate">
+                                    <img src="assets/C.png" alt="C" class="tech-icon">
+                                    <span>C</span>
+                                </div>
+                                <div class="tech intermediate">
+                                    <img src="assets/python.png" alt="Python" class="tech-icon">
+                                    <span>Python</span>
+                                </div>
+                                <div class="tech proficient">
+                                    <img src="assets/html.png" alt="HTML" class="tech-icon">
+                                    <span>HTML</span>
+                                </div>
+                                <div class="tech beginner">
+                                    <img src="assets/mysql.png" alt="MySQL" class="tech-icon">
+                                    <span>MySQL</span>
+                                </div>
                             </div>
-                            <div class="cert-item">
-                                <img src="assets/Certificate/TOMER.png" alt="TOMER" class="cert-img">
-                                <p class="cert-name">TOMER</p>
-                                <a href="assets/Certificate/TOMER.pdf" class="cert-link" target="_blank"
-                                    rel="noopener noreferrer">View PDF</a>
-                            </div>
-                            <div class="cert-item">
-                                <img src="assets/Certificate/front_end.png" alt="Front-End Web Development"
-                                    class="cert-img">
-                                <p class="cert-name">Front-End Web Development</p>
-                                <a href="assets/Certificate/Coursera_certificate2.pdf" class="cert-link" target="_blank"
-                                    rel="noopener noreferrer">View PDF</a>
-                            </div>
-                            <div class="hidden-certs" id="hiddenCerts">
+                        </div>
+                        <div class="skill-slide">
+                            <h3>Certificates</h3>
+                            <div class="certificates-grid" id="certsGrid">
                                 <div class="cert-item">
-                                    <img src="assets/Certificate/intro.png" alt="HTML, CSS, & JavaScript"
+                                    <img src="assets/Certificate/green.png" alt="Green Software Practitioner"
                                         class="cert-img">
-                                    <p class="cert-name">HTML, CSS, & JavaScript</p>
-                                    <a href="assets/Certificate/coursera_certificate.pdf" class="cert-link"
+                                    <p class="cert-name">Green Software Practitioner</p>
+                                    <a href="assets/Certificate/Green_software.pdf" class="cert-link" target="_blank"
+                                        rel="noopener noreferrer">View PDF</a>
+                                </div>
+                                <div class="cert-item">
+                                    <img src="assets/Certificate/TOMER.png" alt="TOMER" class="cert-img">
+                                    <p class="cert-name">TOMER</p>
+                                    <a href="assets/Certificate/TOMER.pdf" class="cert-link" target="_blank"
+                                        rel="noopener noreferrer">View PDF</a>
+                                </div>
+                                <div class="cert-item">
+                                    <img src="assets/Certificate/front_end.png" alt="Front-End Web Development"
+                                        class="cert-img">
+                                    <p class="cert-name">Front-End Web Development</p>
+                                    <a href="assets/Certificate/Coursera_certificate2.pdf" class="cert-link"
                                         target="_blank" rel="noopener noreferrer">View PDF</a>
                                 </div>
-                                <div class="cert-item">
-                                    <img src="assets/Certificate/javascript.png" alt="javascript" class="cert-img">
-                                    <p class="cert-name">JavaScript</p>
-                                    <a href="assets/Certificate/javascript.pdf" class="cert-link" target="_blank"
-                                        rel="noopener noreferrer">View PDF</a>
-                                </div>
-                                <div class="cert-item">
-                                    <img src="assets/cert-design.png" alt="UI/UX Design" class="cert-img">
-                                    <p class="cert-name">UI/UX Design</p>
-                                    <a href="assets/certs/design.pdf" class="cert-link" target="_blank"
-                                        rel="noopener noreferrer">View PDF</a>
+                                <div class="hidden-certs" id="hiddenCerts">
+                                    <div class="cert-item">
+                                        <img src="assets/Certificate/intro.png" alt="HTML, CSS, & JavaScript"
+                                            class="cert-img">
+                                        <p class="cert-name">HTML, CSS, & JavaScript</p>
+                                        <a href="assets/Certificate/coursera_certificate.pdf" class="cert-link"
+                                            target="_blank" rel="noopener noreferrer">View PDF</a>
+                                    </div>
+                                    <div class="cert-item">
+                                        <img src="assets/Certificate/javascript.png" alt="javascript" class="cert-img">
+                                        <p class="cert-name">JavaScript</p>
+                                        <a href="assets/Certificate/javascript.pdf" class="cert-link" target="_blank"
+                                            rel="noopener noreferrer">View PDF</a>
+                                    </div>
+                                    <div class="cert-item">
+                                        <img src="assets/cert-design.png" alt="UI/UX Design" class="cert-img">
+                                        <p class="cert-name">UI/UX Design</p>
+                                        <a href="assets/certs/design.pdf" class="cert-link" target="_blank"
+                                            rel="noopener noreferrer">View PDF</a>
+                                    </div>
                                 </div>
                             </div>
+                            <button class="show-more-btn" id="toggleCertsBtn">Show More</button>
                         </div>
-                        <button class="show-more-btn" id="toggleCertsBtn">Show More</button>
                     </div>
                 </div>
+                <button class="slider-arrow next" id="nextBtn">→</button>
             </div>
-            <button class="slider-arrow next" id="nextBtn">→</button>
-        </div>
-        <div class="slider-dots" id="sliderDots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-    </section>
+            <div class="slider-dots" id="sliderDots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
 
-    <!-- PROJECTS SECTION -->
-    <section class="projects-section" id="projects-section">
-        <h2>Projects</h2>
-        <div class="projects-stack" id="projectsStack">
-            <div class="project-card">
-                <div class="card-inner">
-                    <div class="card-left">
-                        <h3 class="project-title">Taskly – To-Do List Web Website</h3>
-                        <p class="project-desc">
-                            Taskly is a modern task and project management website designed to improve productivity and
-                            organization. It allows
-                            users to manage projects, track tasks with priorities and due dates, visualize schedules
-                            through a calendar view, and
-                            monitor progress with real-time analytics — all within a clean, responsive interface built
-                            using modern web
-                            technologies.
-                        </p>
-                        <a href="https://khaled3204.github.io/taskly/" class="Live-project">
-                            Live project
-                            <img src="assets/arrow.svg" alt="arrow" class="arrow-icon" />
-                        </a>
+        <!-- PROJECTS SECTION -->
+        <section class="projects-section" id="projects-section">
+            <h2>Projects</h2>
+            <div class="projects-stack" id="projectsStack">
+                <div class="project-card">
+                    <div class="card-inner">
+                        <div class="card-left">
+                            <h3 class="project-title">Taskly – To-Do List Web Website</h3>
+                            <p class="project-desc">
+                                Taskly is a modern task and project management website designed to improve productivity
+                                and organization. It allows users to manage projects, track tasks with priorities and
+                                due dates, visualize schedules through a calendar view, and monitor progress with
+                                real-time analytics — all within a clean, responsive interface built using modern web
+                                technologies.
+                            </p>
+                            <a href="https://khaled3204.github.io/taskly/" class="Live-project">
+                                Live project
+                                <img src="assets/arrow.svg" alt="arrow" class="arrow-icon" />
+                            </a>
+                        </div>
+                        <div class="card-right">
+                            <img src="assets/taskly.png" alt="Taskly preview" />
+                        </div>
                     </div>
-                    <div class="card-right">
-                        <img src="assets/taskly.png" alt="Taskly preview" />
+                </div>
+                <div class="project-card">
+                    <div class="card-inner">
+                        <div class="card-left">
+                            <h3 class="project-title">Espresso Escape Coffee Shop Website</h3>
+                            <p class="project-desc">
+                                Espresso Escape Coffee Shop Website is a responsive and visually appealing website
+                                designed to present a coffee shop's menu, atmosphere, and contact information. It
+                                features structured navigation, individual coffee detail pages, and a styled contact
+                                form, demonstrating strong fundamentals in HTML, CSS, responsive design, and clean UI
+                                layout.
+                            </p>
+                            <a href="https://khaled3204.github.io/Espresso-Escape-coffee-shop/" class="Live-project">
+                                Live project
+                                <img src="assets/arrow.svg" alt="arrow" class="arrow-icon" />
+                            </a>
+                        </div>
+                        <div class="card-right">
+                            <img src="assets/espresso_escape.png" alt="espresso escape preview" />
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-inner">
+                        <div class="card-left">
+                            <h3 class="project-title">Discord Bot Developer</h3>
+                            <p class="project-desc">
+                                This Discord Bot is a feature-rich server management and entertainment bot built using
+                                Python and the discord.py library. It includes role-restricted administrative tools,
+                                interactive commands, direct messaging utilities, polling features, and a custom
+                                roulette system with dynamic image generation. The bot also supports multilingual name
+                                rendering (including Arabic), advanced permission handling, and automated moderation
+                                features, demonstrating strong backend logic, API integration, and event-driven
+                                programming principles.
+                            </p>
+                            <a href="#" class="Live-project" id="discordLiveLink">
+                                Live project
+                                <img src="assets/arrow.svg" alt="arrow" class="arrow-icon" />
+                            </a>
+                        </div>
+                        <div class="card-right">
+                            <img src="assets/Discord.png" alt="Discord preview" />
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="project-card">
-                <div class="card-inner">
-                    <div class="card-left">
-                        <h3 class="project-title">Espresso Escape Coffee Shop Website</h3>
-                        <p class="project-desc">
-                            Espresso Escape Coffee Shop Website is a responsive and visually appealing website designed
-                            to present a coffee shop’s
-                            menu, atmosphere, and contact information. It features structured navigation, individual
-                            coffee detail pages, and a
-                            styled contact form, demonstrating strong fundamentals in HTML, CSS, responsive design, and
-                            clean UI layout.
-                        </p>
-                        <a href="https://khaled3204.github.io/Espresso-Escape-coffee-shop/" class="Live-project">
-                            Live project
-                            <img src="assets/arrow.svg" alt="arrow" class="arrow-icon" />
-                        </a>
-                    </div>
-                    <div class="card-right">
-                        <img src="assets/espresso_escape.png" alt="espresso escape preview" />
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="card-inner">
-                    <div class="card-left">
-                        <h3 class="project-title">Discord Bot Developer</h3>
-                        <p class="project-desc">
-                            This Discord Bot is a feature-rich server management and entertainment bot built using
-                            Python and the discord.py
-                            library. It includes role-restricted administrative tools, interactive commands, direct
-                            messaging utilities, polling
-                            features, and a custom roulette system with dynamic image generation.
-                            The bot also supports multilingual name rendering (including Arabic), advanced permission
-                            handling, and automated
-                            moderation features, demonstrating strong backend logic, API integration, and event-driven
-                            programming principles.
-                        </p>
-                        <a href="#" class="Live-project" id="discordLiveLink">
-                            Live project
-                            <img src="assets/arrow.svg" alt="arrow" class="arrow-icon" />
-                        </a>
-                    </div>
-                    <div class="card-right">
-                        <img src="assets/Discord.png" alt="Discord preview" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CONTACT SECTION -->
-    <section class="contact-section" id="contact-section">
-        <h2>Contact Me</h2>
-        <div class="contact-container">
-            <form class="contact-form" id="contactForm" novalidate>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your name" required />
-                    <small class="field-hint" id="nameHint"></small>
+        <!-- CONTACT SECTION -->
+        <section class="contact-section" id="contact-section">
+            <h2>Contact Me</h2>
+            <div class="contact-container">
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required />
+                        <small class="field-hint" id="nameHint"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required />
+                        <small class="field-hint" id="emailHint"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Write your message..."
+                            required></textarea>
+                        <small class="field-hint" id="messageHint"></small>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span id="btnText">Send Message</span>
+                        <img src="assets/arrow.svg" alt="send" class="arrow-icon" />
+                    </button>
+                    <div id="formFeedback" class="form-feedback"></div>
+                </form>
+                <div class="contact-info">
+                    <div class="contact-info-heading">
+                        <h3>Let's talk</h3>
+                        <!-- Spline viewer removed from here – now in About section -->
+                    </div>
+                    <p class="contact-description">
+                        Feel free to reach out if you want to collaborate, have a question, or just say hi.
+                    </p>
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <a href="mailto:khaledalshalaty1@gmail.com">khaledalshalaty1@gmail.com</a>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Location</span>
+                        <p>İstanbul, Türkiye</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/khaled3204" target="_blank" rel="noopener noreferrer"
+                            class="social-icon">GitHub</a>
+                        <a href="https://www.linkedin.com/in/khaled-alshalaty-24a47b309/" target="_blank"
+                            rel="noopener noreferrer" class="social-icon">LinkedIn</a>
+                        <a href="https://wa.me/+905551703775" class="social-icon" target="_blank"
+                            rel="noopener noreferrer" id="whatsappLink">Whatsapp</a>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="your@email.com" required />
-                    <small class="field-hint" id="emailHint"></small>
+            </div>
+        </section>
+
+        <!-- ===== ACCESS DENIED MODAL ===== -->
+        <div class="modal-overlay" id="accessModal">
+            <div class="modal-content">
+                <button class="modal-close" id="modalCloseBtn">&times;</button>
+                <div class="modal-icon">
+                    <img src="assets/padlock.svg" alt="Lock" />
                 </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Write your message..."
-                        required></textarea>
-                    <small class="field-hint" id="messageHint"></small>
-                </div>
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <span id="btnText">Send Message</span>
-                    <img src="assets/arrow.svg" alt="send" class="arrow-icon" />
-                </button>
-                <div id="formFeedback" class="form-feedback"></div>
-            </form>
-            <div class="contact-info">
-                <h3>Let's talk</h3>
-                <p class="contact-description">
-                    Feel free to reach out if you want to collaborate, have a question, or just say hi.
+                <h2>Access Denied</h2>
+                <p class="modal-restricted">This section is restricted</p>
+                <p class="modal-contact">
+                    To request access, please
+                    <a href="#contact-section" id="modalContactLink">contact me</a>.
                 </p>
-                <div class="info-item">
-                    <span class="info-label">Email</span>
-                    <a href="mailto:khaledalshalaty1@gmail.com">khaledalshalaty1@gmail.com</a>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Location</span>
-                    <p>İstanbul, Türkiye</p>
-                </div>
-                <div class="social-links">
-                    <a href="https://github.com/khaled3204" target="_blank" rel="noopener noreferrer"
-                        class="social-icon">GitHub</a>
-                    <a href="https://www.linkedin.com/in/khaled-alshalaty-24a47b309/" target="_blank"
-                        rel="noopener noreferrer" class="social-icon">LinkedIn</a>
-                    <a href="https://wa.me/+905551703775" class="social-icon" target="_blank" rel="noopener noreferrer"
-                        id="whatsappLink">Whatsapp</a>
-                </div>
             </div>
         </div>
-    </section>
 
-    <!-- ===== ACCESS DENIED MODAL ===== -->
-    <div class="modal-overlay" id="accessModal">
-        <div class="modal-content">
-            <button class="modal-close" id="modalCloseBtn">&times;</button>
-            <div class="modal-icon">
-                <!-- Replace with your own lock SVG or image -->
-                <img src="assets/padlock.svg" alt="Lock" />
-            </div>
-            <h2>Access Denied</h2>
-            <p class="modal-restricted">This section is restricted</p>
-            <p class="modal-contact">
-                To request access, please
-                <a href="#contact-section" id="modalContactLink">contact me</a>.
-            </p>
-        </div>
     </div>
+    <!-- /siteContent -->
 
     <script src="script.js"></script>
 </body>
