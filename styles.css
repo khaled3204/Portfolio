@@ -271,3 +271,30 @@ body {
 }
 
 /* Responsive rules live in responsive.css */
+
+/* =============================================
+   ABOUT SPLINE VIEWER (next to bio text)
+   ============================================= */
+.about-bio-wrapper {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+spline-viewer.about-viewer {
+    top: 0;
+    right: -20%;
+}
+
+/* Adjust bio-card to allow side-by-side */
+.bio-card {
+    flex: 1;
+    /* takes remaining space */
+    max-width: 1000px;
+    /* keep as before */
+    margin-top: 0;
+    /* reset margin */
+}
+
+/* If you want the viewer to be larger/smaller, adjust width/height here */

@@ -53,6 +53,18 @@ img {
         width: 100%;
     }
 
+    /* ---- About Spline Viewer on tablets ---- */
+    .about-bio-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    spline-viewer.about-viewer {
+        width: 280px;
+        height: 280px;
+    }
+
     /* ---- Projects ---- */
     .card-inner {
         flex-direction: column;
@@ -112,6 +124,12 @@ img {
 
     .services-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* ---- About Spline Viewer on small tablets ---- */
+    spline-viewer.about-viewer {
+        width: 220px;
+        height: 220px;
     }
 
     /* ---- Skills ---- */
@@ -299,6 +317,12 @@ img {
         text-align: left;
     }
 
+    /* ---- About Spline Viewer on phones ---- */
+    spline-viewer.about-viewer {
+        width: 180px;
+        height: 180px;
+    }
+
     .services-section h2 {
         font-size: 22px;
     }
@@ -463,11 +487,7 @@ img {
         font-size: 22px;
     }
 
-    spline-viewer.contact-viewer {
-        width: 140px;
-        height: 140px;
-        right: -10%;
-    }
+    /* Removed .contact-viewer rule – no longer used */
 
     .contact-description {
         font-size: 15px;

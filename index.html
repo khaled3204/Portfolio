@@ -31,6 +31,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="responsive.css">
 
+    <!-- Additional styles for the About Spline viewer -->
+    <style>
+        .about-bio-wrapper {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        spline-viewer.about-viewer {
+            flex-shrink: 0;
+            width: 340px;
+            height: 340px;
+        }
+
+        /* Override contact-viewer – hide it since we moved it */
+        spline-viewer.contact-viewer {
+            display: none !important;
+        }
+    </style>
+
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.98/build/spline-viewer.js"></script>
 </head>
 
@@ -148,20 +169,26 @@
                 <div class="right-content">
                     <div class="about-section">
                         <h1>About</h1>
-                        <div class="bio-card">
-                            <p>Hello! I'm a recent Software Engineering graduate from Nişantaşı University in Istanbul.
-                                My
-                                journey in tech started with a curiosity for how things work, which evolved into a
-                                passion
-                                for building them.</p>
-                            <p>I thrive at the intersection of design and functionality, creating applications that are
-                                both
-                                beautiful and performant. Currently, I'm focused on full-stack development while
-                                exploring
-                                new technologies.</p>
-                            <p>Living in Istanbul has given me a unique perspective, blending Eastern and Western
-                                influences
-                                in my approach to problem-solving and design.</p>
+                        <!-- NEW: Bio wrapper with Spline viewer next to text -->
+                        <div class="about-bio-wrapper">
+                            <div class="bio-card">
+                                <p>Hello! I'm a recent Software Engineering graduate from Nişantaşı University in
+                                    Istanbul.
+                                    My journey in tech started with a curiosity for how things work, which evolved into
+                                    a
+                                    passion for building them.</p>
+                                <p>I thrive at the intersection of design and functionality, creating applications that
+                                    are
+                                    both beautiful and performant. Currently, I'm focused on full-stack development
+                                    while
+                                    exploring new technologies.</p>
+                                <p>Living in Istanbul has given me a unique perspective, blending Eastern and Western
+                                    influences in my approach to problem-solving and design.</p>
+                            </div>
+                            <!-- Spline 3D character next to bio text -->
+                            <spline-viewer class="about-viewer"
+                                url="https://prod.spline.design/QUmOs-7NxKHYLn1h/scene.splinecode">
+                            </spline-viewer>
                         </div>
                     </div>
 
@@ -328,13 +355,9 @@
                             <h3 class="project-title">Taskly – To-Do List Web Website</h3>
                             <p class="project-desc">
                                 Taskly is a modern task and project management website designed to improve productivity
-                                and
-                                organization. It allows
-                                users to manage projects, track tasks with priorities and due dates, visualize schedules
-                                through a calendar view, and
-                                monitor progress with real-time analytics — all within a clean, responsive interface
-                                built
-                                using modern web
+                                and organization. It allows users to manage projects, track tasks with priorities and
+                                due dates, visualize schedules through a calendar view, and monitor progress with
+                                real-time analytics — all within a clean, responsive interface built using modern web
                                 technologies.
                             </p>
                             <a href="https://khaled3204.github.io/taskly/" class="Live-project">
@@ -353,13 +376,10 @@
                             <h3 class="project-title">Espresso Escape Coffee Shop Website</h3>
                             <p class="project-desc">
                                 Espresso Escape Coffee Shop Website is a responsive and visually appealing website
-                                designed
-                                to present a coffee shop’s
-                                menu, atmosphere, and contact information. It features structured navigation, individual
-                                coffee detail pages, and a
-                                styled contact form, demonstrating strong fundamentals in HTML, CSS, responsive design,
-                                and
-                                clean UI layout.
+                                designed to present a coffee shop's menu, atmosphere, and contact information. It
+                                features structured navigation, individual coffee detail pages, and a styled contact
+                                form, demonstrating strong fundamentals in HTML, CSS, responsive design, and clean UI
+                                layout.
                             </p>
                             <a href="https://khaled3204.github.io/Espresso-Escape-coffee-shop/" class="Live-project">
                                 Live project
@@ -377,15 +397,11 @@
                             <h3 class="project-title">Discord Bot Developer</h3>
                             <p class="project-desc">
                                 This Discord Bot is a feature-rich server management and entertainment bot built using
-                                Python and the discord.py
-                                library. It includes role-restricted administrative tools, interactive commands, direct
-                                messaging utilities, polling
-                                features, and a custom roulette system with dynamic image generation.
-                                The bot also supports multilingual name rendering (including Arabic), advanced
-                                permission
-                                handling, and automated
-                                moderation features, demonstrating strong backend logic, API integration, and
-                                event-driven
+                                Python and the discord.py library. It includes role-restricted administrative tools,
+                                interactive commands, direct messaging utilities, polling features, and a custom
+                                roulette system with dynamic image generation. The bot also supports multilingual name
+                                rendering (including Arabic), advanced permission handling, and automated moderation
+                                features, demonstrating strong backend logic, API integration, and event-driven
                                 programming principles.
                             </p>
                             <a href="#" class="Live-project" id="discordLiveLink">
@@ -431,9 +447,7 @@
                 <div class="contact-info">
                     <div class="contact-info-heading">
                         <h3>Let's talk</h3>
-                        <spline-viewer class="contact-viewer"
-                            url="https://prod.spline.design/QUmOs-7NxKHYLn1h/scene.splinecode">
-                        </spline-viewer>
+                        <!-- Spline viewer removed from here – now in About section -->
                     </div>
                     <p class="contact-description">
                         Feel free to reach out if you want to collaborate, have a question, or just say hi.
@@ -463,7 +477,6 @@
             <div class="modal-content">
                 <button class="modal-close" id="modalCloseBtn">&times;</button>
                 <div class="modal-icon">
-                    <!-- Replace with your own lock SVG or image -->
                     <img src="assets/padlock.svg" alt="Lock" />
                 </div>
                 <h2>Access Denied</h2>

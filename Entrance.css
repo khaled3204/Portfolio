@@ -58,13 +58,5 @@ spline-viewer.entrance {
     margin-bottom: 0;
 }
 
-spline-viewer.contact-viewer {
-    position: absolute;
-    top: 50%;
-    right: -20%;
-    transform: translateY(-50%);
-    width: 260px;
-    height: 260px;
-}
 
 /* Responsive rules live in responsive.css */
