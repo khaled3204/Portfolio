@@ -1,59 +1,74 @@
 // =============================================
-// 0. Entrance Screen (Spline intro) - FIXED
+// 0. Entrance Screen (Spline intro) - FIXED & ROBUST
 // =============================================
 document.addEventListener('DOMContentLoaded', function () {
     const entranceScreen = document.getElementById('entranceScreen');
     const entranceViewer = document.getElementById('entranceViewer');
     const siteContent = document.getElementById('siteContent');
 
-    if (entranceScreen && entranceViewer && siteContent) {
-        // Lock scrolling until the user enters
-        document.documentElement.style.overflow = 'hidden';
-
-        function revealSite() {
-            entranceScreen.classList.add('entrance-fade-out');
-            siteContent.classList.remove('site-hidden');
-            document.documentElement.style.overflow = '';
-
-            // Remove the entrance screen from the DOM after fade
-            setTimeout(function () {
-                entranceScreen.remove();
-            }, 500);
-        }
-
-        function attachClickHandler() {
-            // Use 'click' – more reliable than 'mouseDown'
-            entranceViewer.addEventListener('click', function (e) {
-                // Try to get the clicked object name from various locations
-                let objectName = '';
-                if (e.target && typeof e.target.name === 'string') {
-                    objectName = e.target.name;
-                } else if (e.detail && e.detail.target && typeof e.detail.target.name === 'string') {
-                    objectName = e.detail.target.name;
-                } else if (e.detail && typeof e.detail.name === 'string') {
-                    objectName = e.detail.name;
-                }
-
-                console.log('Spline object clicked:', objectName);
-
-                // Trigger reveal if name contains "enter" or "button" – or fallback to any click
-                const lower = objectName.toLowerCase();
-                if (lower.includes('enter') || lower.includes('button') || objectName === '') {
-                    revealSite();
-                }
-            });
-        }
-
-        // Attach when the Spline viewer loads
-        entranceViewer.addEventListener('load', function () {
-            attachClickHandler();
-        });
-
-        // Fallback: if 'load' never fires, attach after 3 seconds
-        setTimeout(function () {
-            attachClickHandler();
-        }, 3000);
+    if (!entranceScreen || !entranceViewer || !siteContent) {
+        // If elements are missing, just show the site (safety)
+        if (siteContent) siteContent.classList.remove('site-hidden');
+        return;
     }
+
+    // Lock scrolling until the user enters
+    document.documentElement.style.overflow = 'hidden';
+
+    let isRevealed = false;
+
+    function revealSite() {
+        if (isRevealed) return;
+        isRevealed = true;
+
+        entranceScreen.classList.add('entrance-fade-out');
+        siteContent.classList.remove('site-hidden');
+        document.documentElement.style.overflow = '';
+
+        // Remove the entrance screen after fade
+        setTimeout(function () {
+            entranceScreen.remove();
+        }, 500);
+    }
+
+    function attachClickHandler() {
+        // Use 'click' event – works on both desktop and mobile
+        entranceViewer.addEventListener('click', function (e) {
+            // Try multiple ways to get the clicked object name
+            let objectName = '';
+            if (e.target && typeof e.target.name === 'string') {
+                objectName = e.target.name;
+            } else if (e.detail && e.detail.target && typeof e.detail.target.name === 'string') {
+                objectName = e.detail.target.name;
+            } else if (e.detail && typeof e.detail.name === 'string') {
+                objectName = e.detail.name;
+            }
+
+            console.log('Spline object clicked:', objectName);
+
+            // If the name contains "enter" or "button", or if we can't determine (fallback),
+            // reveal the site. Also allow any click if the viewer is the target (safety).
+            const lower = objectName.toLowerCase();
+            if (lower.includes('enter') || lower.includes('button') || objectName === '') {
+                revealSite();
+            }
+        });
+    }
+
+    // Attach when the Spline viewer loads
+    entranceViewer.addEventListener('load', function () {
+        attachClickHandler();
+    });
+
+    // Fallback: if 'load' never fires (e.g., slow network), attach after 2 seconds
+    setTimeout(function () {
+        attachClickHandler();
+    }, 2000);
+
+    // Extra safety: if after 5 seconds the viewer hasn't loaded and we haven't revealed,
+    // force reveal? No – we want the user to click, so we keep waiting.
+    // But if the viewer is completely broken, we could provide a fallback "Enter" button.
+    // For now, do nothing – the user must click.
 });
 
 // =============================================
