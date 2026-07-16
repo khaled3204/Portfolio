@@ -1,8 +1,8 @@
 /* =============================================
    ENTRANCE SCREEN (Spline 3D intro)
-   Covers the whole viewport until "Enter Portfolio"
-   is clicked. Nothing else is visible/scrollable
-   until then.
+   Covers the whole viewport until the "Enter Portfolio"
+   button *inside the Spline scene* is clicked. Nothing
+   else is visible/scrollable until then.
    ============================================= */
 .entrance-screen {
     position: fixed;
@@ -12,9 +12,6 @@
     overflow: hidden;
     background-color: var(--bg-primary);
     z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* the entrance viewer – scaled up to appear bigger */
@@ -31,29 +28,6 @@ spline-viewer.entrance {
     /* remove any old offsets */
     right: auto !important;
     bottom: auto !important;
-}
-
-.enter-portfolio-btn {
-    position: relative;
-    z-index: 1;
-    bottom: 60px;
-    align-self: flex-end;
-    margin: 0 auto 60px;
-    background: var(--accent-purple);
-    color: #FFFFFF;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    padding: 16px 40px;
-    border: none;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.enter-portfolio-btn:hover {
-    background: var(--accent-purple-hover);
-    transform: translateY(-2px);
 }
 
 /* Fades the entrance screen out smoothly before removal */
@@ -74,9 +48,9 @@ spline-viewer.entrance {
    Sits to the right of the "Let's talk" heading.
    ============================================= */
 .contact-info-heading {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 16px;
     margin-bottom: 15%;
 }
 
@@ -85,9 +59,12 @@ spline-viewer.entrance {
 }
 
 spline-viewer.contact-viewer {
-    width: 90px;
-    height: 90px;
-    flex-shrink: 0;
+    position: absolute;
+    top: 50%;
+    right: -20%;
+    transform: translateY(-50%);
+    width: 260px;
+    height: 260px;
 }
 
 /* Responsive rules live in responsive.css */

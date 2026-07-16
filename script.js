@@ -1,16 +1,21 @@
 // =============================================
 // 0. Entrance Screen (Spline intro)
+// The "Enter Portfolio" button is a 3D object inside
+// the Spline scene itself (not HTML). Spline fires a
+// 'mouseDown' event with e.target.name set to the
+// clicked object's name, so we reveal the site when
+// that object is clicked.
 // =============================================
 document.addEventListener('DOMContentLoaded', function () {
     const entranceScreen = document.getElementById('entranceScreen');
-    const enterBtn = document.getElementById('enterPortfolioBtn');
+    const entranceViewer = document.getElementById('entranceViewer');
     const siteContent = document.getElementById('siteContent');
 
-    if (entranceScreen && enterBtn && siteContent) {
+    if (entranceScreen && entranceViewer && siteContent) {
         // Lock scrolling until the user enters
         document.documentElement.style.overflow = 'hidden';
 
-        enterBtn.addEventListener('click', function () {
+        function revealSite() {
             entranceScreen.classList.add('entrance-fade-out');
             siteContent.classList.remove('site-hidden');
             document.documentElement.style.overflow = '';
@@ -20,6 +25,21 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(function () {
                 entranceScreen.remove();
             }, 500);
+        }
+
+        entranceViewer.addEventListener('load', function () {
+            entranceViewer.addEventListener('mouseDown', function (e) {
+                // Log the clicked object's name once so you can confirm
+                // it matches the button inside your Spline scene, then
+                // tighten the condition below if needed, e.g.:
+                // if (e.target.name === 'Enter Portfolio') { ... }
+                console.log('Spline object clicked:', e.target && e.target.name);
+
+                const name = (e.target && e.target.name || '').toLowerCase();
+                if (name.includes('enter') || name.includes('button')) {
+                    revealSite();
+                }
+            });
         });
     }
 });
