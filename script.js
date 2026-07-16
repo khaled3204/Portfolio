@@ -1,4 +1,30 @@
 // =============================================
+// 0. Entrance Screen (Spline intro)
+// =============================================
+document.addEventListener('DOMContentLoaded', function () {
+    const entranceScreen = document.getElementById('entranceScreen');
+    const enterBtn = document.getElementById('enterPortfolioBtn');
+    const siteContent = document.getElementById('siteContent');
+
+    if (entranceScreen && enterBtn && siteContent) {
+        // Lock scrolling until the user enters
+        document.documentElement.style.overflow = 'hidden';
+
+        enterBtn.addEventListener('click', function () {
+            entranceScreen.classList.add('entrance-fade-out');
+            siteContent.classList.remove('site-hidden');
+            document.documentElement.style.overflow = '';
+
+            // Remove the entrance screen from the DOM after the fade
+            // so the (heavier) 3D viewer stops rendering in the background
+            setTimeout(function () {
+                entranceScreen.remove();
+            }, 500);
+        });
+    }
+});
+
+// =============================================
 // 1. Skills Slider
 // =============================================
 document.addEventListener('DOMContentLoaded', function () {

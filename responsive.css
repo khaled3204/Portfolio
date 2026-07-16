@@ -463,6 +463,11 @@ img {
         font-size: 22px;
     }
 
+    spline-viewer.contact-viewer {
+        width: 60px;
+        height: 60px;
+    }
+
     .contact-description {
         font-size: 15px;
     }
